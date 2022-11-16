@@ -163,3 +163,54 @@ exports.getUserById = (req, res, next) => {
     res.send(user)
   })
 }
+
+// get user posts
+exports.getUserPosts = (req, res, next) => {
+  User.findById(req.params.id)
+    .populate('posts')
+    .exec((err, user) => {
+      if (err) {
+        return next(err)
+      }
+      if (user === null) {
+        const err = new Error('User not found')
+        err.status = 404
+        return next(err)
+      }
+      res.send(user.posts)
+    })
+}
+
+// get user friends
+exports.getUserFriends = (req, res, next) => {
+  User.findById(req.params.id)
+    .populate('friends')
+    .exec((err, user) => {
+      if (err) {
+        return next(err)
+      }
+      if (user === null) {
+        const err = new Error('User not found')
+        err.status = 404
+        return next(err)
+      }
+      res.send(user.friends)
+    })
+}
+
+// get user friend requests
+exports.getUserFriendRequests = (req, res, next) => {
+  User.findById(req.params.id)
+    .populate('friendRequests')
+    .exec((err, user) => {
+      if (err) {
+        return next(err)
+      }
+      if (user === null) {
+        const err = new Error('User not found')
+        err.status = 404
+        return next(err)
+      }
+      res.send(user.friendRequests)
+    })
+}

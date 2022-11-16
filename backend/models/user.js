@@ -8,6 +8,11 @@ const UserSchema = new mongoose.Schema({
     default: 'user',
     enum: ['user', 'admin'],
   },
+  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  friendRequests: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'FriendRequest' },
+  ],
 })
 
 module.exports = mongoose.model('User', UserSchema)
