@@ -14,30 +14,41 @@ interface UserInterface {
 // CONTEXT
 const UserContext = createContext({
   user: {} as UserInterface | null,
+  otherUser: {} as UserInterface | null,
   registerUsername: '',
   setRegisterUsername: (username: string) => {},
   registerPassword: '',
   setRegisterPassword: (password: string) => {},
+  userFriends: [] as UserInterface[] | [],
+  setUserFriends: (friends: UserInterface[]) => {},
 
   loginUsername: '',
   setLoginUsername: (username: string) => {},
   loginPassword: '',
   setLoginPassword: (password: string) => {},
+  newFriendUsernameInput: '',
+  setNewFriendUsernameInput: (username: string) => {},
 
   register: () => {},
   login: () => {},
   logout: () => {},
   getUser: () => {},
+  getUserByUsername: (username: string) => {},
+  getOtherUserByUsername: (username: string) => {},
+  getUserFriends: (username: string) => {},
 })
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserInterface | null>(null)
+  const [otherUser, setOtherUser] = useState<UserInterface | null>(null)
 
   const [registerUsername, setRegisterUsername] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
-
   const [loginUsername, setLoginUsername] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
+  const [newFriendUsernameInput, setNewFriendUsernameInput] = useState('')
+
+  const [userFriends, setUserFriends] = useState<UserInterface[] | []>([])
 
   const register = async () => {
     try {
@@ -114,24 +125,89 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       })
   }
 
+  // GET user by username
+  const getUserByUsername = async (username: string) => {
+    await axios({
+      method: 'GET',
+      withCredentials: true,
+      url: `/api/user/${username}`,
+    })
+      .then((res) => {
+        if (res.data.user) {
+          setUser(res.data.user)
+        } else {
+          setUser(null)
+        }
+      })
+      .catch((err) => {
+        console.log(err.response?.data.message)
+      })
+  }
+
+  // GET other user by username
+  const getOtherUserByUsername = async (username: string) => {
+    await axios({
+      method: 'GET',
+      withCredentials: true,
+      url: `/api/user/${username}`,
+    })
+      .then((res) => {
+        if (res.data.user) {
+          setOtherUser(res.data.user)
+        } else {
+          setOtherUser(null)
+        }
+      })
+      .catch((err) => {
+        console.log(err.response?.data.message)
+      })
+  }
+
+  // GET user friends - /api/user/:username/friends
+  const getUserFriends = async (username: string) => {
+    await axios({
+      method: 'GET',
+      withCredentials: true,
+      url: `/api/user/${username}/friends`,
+    })
+      .then((res) => {
+        if (res.data.friends) {
+          setUserFriends(res.data.friends)
+        } else {
+          setUserFriends([])
+        }
+      })
+      .catch((err) => {
+        console.log(err.response?.data.message)
+      })
+  }
+
   return (
     <UserContext.Provider
       value={{
         user,
+        otherUser,
         registerUsername,
         setRegisterUsername,
         registerPassword,
         setRegisterPassword,
+        userFriends,
+        setUserFriends,
 
         loginUsername,
         setLoginUsername,
         loginPassword,
         setLoginPassword,
+        newFriendUsernameInput,
+        setNewFriendUsernameInput,
 
         register,
         login,
         logout,
         getUser,
+        getUserByUsername,
+        getOtherUserByUsername,
+        getUserFriends,
       }}
     >
       {children}

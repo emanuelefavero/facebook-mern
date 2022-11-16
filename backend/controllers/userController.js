@@ -149,68 +149,51 @@ exports.getUser = (req, res, next) => {
   }
 }
 
-// get user by id
-exports.getUserById = (req, res, next) => {
-  User.findById(req.params.id).exec((err, user) => {
+// get user by username
+exports.getUserByUsername = (req, res, next) => {
+  User.findOne({ username: req.params.username }).exec((err, foundUser) => {
     if (err) {
       return next(err)
     }
-    if (user === null) {
-      const err = new Error('User not found')
-      err.status = 404
-      return next(err)
-    }
-    res.send(user)
-  })
-}
 
-// get user posts
-exports.getUserPosts = (req, res, next) => {
-  User.findById(req.params.id)
-    .populate('posts')
-    .exec((err, user) => {
-      if (err) {
-        return next(err)
-      }
-      if (user === null) {
-        const err = new Error('User not found')
-        err.status = 404
-        return next(err)
-      }
-      res.send(user.posts)
-    })
+    if (foundUser) {
+      res.status(200).json({ user: foundUser })
+    } else {
+      res.status(404).json({ message: 'User not found.' })
+    }
+  })
 }
 
 // get user friends
 exports.getUserFriends = (req, res, next) => {
-  User.findById(req.params.id)
+  User.findOne({ username: req.params.username })
     .populate('friends')
-    .exec((err, user) => {
+    .exec((err, foundUser) => {
       if (err) {
         return next(err)
       }
-      if (user === null) {
-        const err = new Error('User not found')
-        err.status = 404
-        return next(err)
+
+      if (foundUser) {
+        res.status(200).json({ friends: foundUser.friends })
+      } else {
+        res.status(404).json({ message: 'User not found.' })
       }
-      res.send(user.friends)
     })
 }
 
 // get user friend requests
 exports.getUserFriendRequests = (req, res, next) => {
-  User.findById(req.params.id)
+  User.findOne({ username: req.params.username })
     .populate('friendRequests')
-    .exec((err, user) => {
+    .exec((err, foundUser) => {
       if (err) {
         return next(err)
       }
-      if (user === null) {
-        const err = new Error('User not found')
-        err.status = 404
-        return next(err)
+
+      if (foundUser) {
+        res.status(200).json({ friendRequests: foundUser.friendRequests })
+      } else {
+        res.status(404).json({ message: 'User not found.' })
       }
-      res.send(user.friendRequests)
     })
 }

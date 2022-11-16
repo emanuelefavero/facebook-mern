@@ -6,9 +6,9 @@ const Post = require('../models/post')
 exports.createFriendRequest = async (req, res) => {
   try {
     // Find the user that sent the friend request
-    const fromUser = await User.findById(req.body.from)
+    const fromUser = await User.findOne({ username: req.body.from })
     // Find the user that received the friend request
-    const toUser = await User.findById(req.body.to)
+    const toUser = await User.findOne({ username: req.body.to })
 
     // Create a new friend request
     const friendRequest = new FriendRequest({
@@ -97,6 +97,19 @@ exports.declineFriendRequest = async (req, res) => {
   }
 }
 
+// Get all friend requests
+exports.getFriendRequests = async (req, res) => {
+  try {
+    // Find all friend requests
+    const friendRequests = await FriendRequest.find()
+
+    // Send all friend requests
+    res.send(friendRequests)
+  } catch (err) {
+    res.status
+  }
+}
+
 // Get a friend request
 exports.getFriendRequest = async (req, res) => {
   try {
@@ -107,5 +120,41 @@ exports.getFriendRequest = async (req, res) => {
     res.send(friendRequest)
   } catch (err) {
     res.status(500).send(err)
+  }
+}
+
+// Get all friend requests from a user
+exports.getFriendRequestsFrom = async (req, res) => {
+  try {
+    // Find the user
+    const user = await User.findById(req.params.id)
+
+    // Find all friend requests from the user
+    const friendRequests = await FriendRequest.find({
+      from: user,
+    })
+
+    // Send all friend requests from the user
+    res.send(friendRequests)
+  } catch (err) {
+    res.status(500).send
+  }
+}
+
+// Get all friend requests to a user
+exports.getFriendRequestsTo = async (req, res) => {
+  try {
+    // Find the user
+    const user = await User.findById(req.params.id)
+
+    // Find all friend requests to the user
+    const friendRequests = await FriendRequest.find({
+      to: user,
+    })
+
+    // Send all friend requests to the user
+    res.send(friendRequests)
+  } catch (err) {
+    res.status(500).send
   }
 }

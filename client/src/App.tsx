@@ -12,6 +12,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import NotFound from './pages/NotFound'
+import OtherUserDetail from './pages/OtherUserDetail'
 
 // Import Context
 import UserContext from './context/UserContext'
@@ -48,6 +49,8 @@ function App() {
 
               {/* NOT FOUND */}
               <Route path='*' element={<NotFound />} />
+
+              <Route path='/user/:username' element={<OtherUserDetail />} />
             </Routes>
           </main>
         </Router>
