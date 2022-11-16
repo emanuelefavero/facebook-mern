@@ -1,15 +1,12 @@
 import React, { useState, createContext } from 'react'
 import axios from 'axios'
 import type { AxiosError } from 'axios'
-axios.defaults.baseURL = 'http://localhost:4000'
 
-// INTERFACES
-interface UserInterface {
-  _id: string
-  username: string
-  password: string
-  role: string
-}
+// IMPORT INTERFACES
+import UserInterface from '../interfaces/UserInterface'
+import FriendRequestInterface from '../interfaces/FriendRequestInterface'
+
+axios.defaults.baseURL = 'http://localhost:4000'
 
 // CONTEXT
 const UserContext = createContext({
@@ -21,6 +18,8 @@ const UserContext = createContext({
   setRegisterPassword: (password: string) => {},
   userFriends: [] as UserInterface[] | [],
   setUserFriends: (friends: UserInterface[]) => {},
+  userFriendRequests: [] as FriendRequestInterface[] | [],
+  setUserFriendRequests: (friendRequests: FriendRequestInterface[]) => {},
 
   loginUsername: '',
   setLoginUsername: (username: string) => {},
@@ -36,6 +35,7 @@ const UserContext = createContext({
   getUserByUsername: (username: string) => {},
   getOtherUserByUsername: (username: string) => {},
   getUserFriends: (username: string) => {},
+  getUserFriendRequests: (username: string) => {},
 })
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
@@ -49,6 +49,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [newFriendUsernameInput, setNewFriendUsernameInput] = useState('')
 
   const [userFriends, setUserFriends] = useState<UserInterface[] | []>([])
+  const [userFriendRequests, setUserFriendRequests] = useState<
+    FriendRequestInterface[] | []
+  >([])
 
   const register = async () => {
     try {
@@ -182,6 +185,25 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       })
   }
 
+  // GET user friend requests - /api/user/:username/friend-requests
+  const getUserFriendRequests = async (username: string) => {
+    await axios({
+      method: 'GET',
+      withCredentials: true,
+      url: `/api/user/${username}/friend-requests`,
+    })
+      .then((res) => {
+        if (res.data.friendRequests) {
+          setUserFriendRequests(res.data.friendRequests)
+        } else {
+          setUserFriendRequests([])
+        }
+      })
+      .catch((err) => {
+        console.log(err.response?.data.message)
+      })
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -193,6 +215,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setRegisterPassword,
         userFriends,
         setUserFriends,
+        userFriendRequests,
+        setUserFriendRequests,
 
         loginUsername,
         setLoginUsername,
@@ -208,6 +232,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         getUserByUsername,
         getOtherUserByUsername,
         getUserFriends,
+        getUserFriendRequests,
       }}
     >
       {children}

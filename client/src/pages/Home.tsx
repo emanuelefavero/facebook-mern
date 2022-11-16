@@ -18,6 +18,13 @@ function Home() {
       <h1>Home</h1>
       <FindNewFriends />
       <h2>Friends</h2>
+      {/* TODO: AFTER friend requests, Insert friend here (UserContext) */}
+
+      {/* BEWARE: Start from OtherUserDetail.tsx (create friend request) */}
+
+      {/* 2. */}
+      {/* TODO: Insert get friend requests here (UserContext) and add accept and decline methods under each request */}
+
       <ul>
         {userFriends.map((friend) => {
           return <li key={friend.username}>{friend.username}</li>

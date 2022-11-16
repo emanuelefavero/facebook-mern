@@ -14,16 +14,17 @@ router.get('/user', userController.getUser)
 router.get('/user/:username', userController.getUserByUsername)
 router.get('/user/:username/friends', userController.getUserFriends)
 router.get(
-  '/user/:username/friendRequests',
+  '/user/:username/friend-requests',
   userController.getUserFriendRequests
 )
 
-router.post('/friendRequest', friendRequestController.createFriendRequest)
-router.put('/friendRequest/:id', friendRequestController.acceptFriendRequest)
+router.post('/friend-request', friendRequestController.createFriendRequest)
+router.put('/friend-request/:id', friendRequestController.acceptFriendRequest)
 router.delete(
-  '/friendRequest/:id',
+  '/friend-request/:id',
   friendRequestController.declineFriendRequest
 )
-router.get('/friendRequest/:id', friendRequestController.getFriendRequest)
+router.get('/friend-request', friendRequestController.getFriendRequests)
+router.get('/friend-request/:id', friendRequestController.getFriendRequest)
 
 module.exports = router

@@ -19,7 +19,8 @@ function UserDetail() {
         <>
           <h2>{otherUser.username}</h2>
 
-          <h2>Friends</h2>
+          {/* 1. */}
+          {/* TODO: Add 'Request Friend' button here that will call createFriendRequest method (from FriendRequestContext). This method should pass { from: user.username and to: otherUser.username } as argument  */}
         </>
       ) : (
         <h2>User Not Found...</h2>

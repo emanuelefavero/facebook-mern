@@ -1,6 +1,7 @@
 import styles from './App.module.css'
 import { useContext, useEffect } from 'react'
 import { UserProvider } from './context/UserContext'
+import { FriendRequestProvider } from './context/FriendRequestContext'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // Import Components
@@ -29,31 +30,33 @@ function App() {
   return (
     <div className={styles.App}>
       <UserProvider>
-        <Router>
-          <Header />
-          <main>
-            <Routes>
-              {/* HOME */}
-              <Route
-                path='/'
-                element={
-                  <ProtectedRoute redirectPath='/login'>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
+        <FriendRequestProvider>
+          <Router>
+            <Header />
+            <main>
+              <Routes>
+                {/* HOME */}
+                <Route
+                  path='/'
+                  element={
+                    <ProtectedRoute redirectPath='/login'>
+                      <Home />
+                    </ProtectedRoute>
+                  }
+                />
 
-              {/* AUTH */}
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Register />} />
+                {/* AUTH */}
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
 
-              {/* NOT FOUND */}
-              <Route path='*' element={<NotFound />} />
+                {/* NOT FOUND */}
+                <Route path='*' element={<NotFound />} />
 
-              <Route path='/user/:username' element={<OtherUserDetail />} />
-            </Routes>
-          </main>
-        </Router>
+                <Route path='/user/:username' element={<OtherUserDetail />} />
+              </Routes>
+            </main>
+          </Router>
+        </FriendRequestProvider>
       </UserProvider>
     </div>
   )
