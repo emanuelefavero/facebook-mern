@@ -52,7 +52,14 @@ function App() {
                 {/* NOT FOUND */}
                 <Route path='*' element={<NotFound />} />
 
-                <Route path='/user/:username' element={<OtherUserDetail />} />
+                <Route
+                  path='/user/:username'
+                  element={
+                    <ProtectedRoute redirectPath='/login'>
+                      <OtherUserDetail />
+                    </ProtectedRoute>
+                  }
+                />
               </Routes>
             </main>
           </Router>

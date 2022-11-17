@@ -17,6 +17,7 @@ router.get(
   '/user/:username/friend-requests',
   userController.getUserFriendRequests
 )
+router.get('/user/username-by-id/:id', userController.getUsernameById)
 
 router.post('/friend-request', friendRequestController.createFriendRequest)
 router.put('/friend-request/:id', friendRequestController.acceptFriendRequest)

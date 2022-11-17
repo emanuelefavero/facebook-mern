@@ -164,6 +164,21 @@ exports.getUserByUsername = (req, res, next) => {
   })
 }
 
+// get user username by id as string
+exports.getUsernameById = (req, res, next) => {
+  User.findById(req.params.id).exec((err, foundUser) => {
+    if (err) {
+      return next(err)
+    }
+
+    if (foundUser) {
+      res.status(200).json({ username: foundUser.username })
+    } else {
+      res.status(404).json({ message: 'User not found.' })
+    }
+  })
+}
+
 // get user friends
 exports.getUserFriends = (req, res, next) => {
   User.findOne({ username: req.params.username })
