@@ -12,8 +12,8 @@ const FriendRequestContext = createContext({
   setFriendRequests: (friendRequests: FriendRequestInterface[]) => {},
 
   createFriendRequest: (friendRequest: FriendRequestInterface) => {},
-  acceptFriendRequest: (friendRequest: FriendRequestInterface) => {},
-  declineFriendRequest: (friendRequest: FriendRequestInterface) => {},
+  acceptFriendRequest: (friendRequestId: string) => {},
+  declineFriendRequest: (friendRequestId: string) => {},
 
   getFriendRequests: () => {},
 })
@@ -42,13 +42,14 @@ export function FriendRequestProvider({
   // Accept a friend request using an axios put request to this url: '/api/friend-request/:id'
   // The friend request object is updated in the database and the friend request is returned.
   // Log the returned friend request to the console.
-  const acceptFriendRequest = async (friendRequest: FriendRequestInterface) => {
+  const acceptFriendRequest = async (friendRequestId: string) => {
     try {
       const response = await axios.put(
-        `/api/friend-request/${friendRequest._id}`,
-        friendRequest
+        `/api/friend-request/${friendRequestId}`,
+        friendRequestId
       )
       console.log(response.data)
+      window.location.reload()
     } catch (error) {
       console.log(error)
     }
@@ -57,14 +58,13 @@ export function FriendRequestProvider({
   // Decline a friend request using an axios delete request to this url: '/api/friend-request/:id'
   // The friend request object is deleted from the database and the friend request is returned.
   // Log the returned friend request to the console.
-  const declineFriendRequest = async (
-    friendRequest: FriendRequestInterface
-  ) => {
+  const declineFriendRequest = async (friendRequestId: string) => {
     try {
       const response = await axios.delete(
-        `/api/friend-request/${friendRequest._id}`
+        `/api/friend-request/${friendRequestId}`
       )
       console.log(response.data)
+      window.location.reload()
     } catch (error) {
       console.log(error)
     }
@@ -77,7 +77,7 @@ export function FriendRequestProvider({
     try {
       const response = await axios.get('/api/friend-request')
       setFriendRequests(response.data)
-      console.log(response.data)
+      // console.log(response.data)
     } catch (error) {
       console.log(error)
     }

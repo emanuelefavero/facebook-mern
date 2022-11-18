@@ -10,7 +10,12 @@ import GetUsernameById from '../components/GetUsernameById'
 
 function Home() {
   const { user, getUser, userFriends, getUserFriends } = useContext(UserContext)
-  const { getFriendRequests, friendRequests } = useContext(FriendRequestContext)
+  const {
+    getFriendRequests,
+    friendRequests,
+    acceptFriendRequest,
+    declineFriendRequest,
+  } = useContext(FriendRequestContext)
 
   useEffect(() => {
     getUser()
@@ -22,23 +27,45 @@ function Home() {
 
   return (
     <div>
-      <h1>Home</h1>
+      <h1>Hello {user?.username}</h1>
       <FindNewFriends />
       <h2>Friends</h2>
-      {/* TODO: AFTER friend requests, Insert friend here (UserContext) */}
-      {/* 2. */}
-      {/* TODO: add accept and decline methods under each request */}
+
+      {userFriends.length > 0 ? (
+        userFriends.map((friend) => (
+          <div key={friend._id}>
+            <GetUsernameById id={friend._id} />
+          </div>
+        ))
+      ) : (
+        <p>You have no friends</p>
+      )}
 
       <h2>Friend Requests</h2>
-      {/* Display friend requests */}
       <ul>
         {friendRequests.map((friendRequest) => {
           return friendRequest.from !== user?._id &&
             friendRequest.to === user?._id ? (
             <li key={friendRequest._id}>
               <>
-                {<GetUsernameById id={friendRequest.from as string} />} wants to
-                be friends with you
+                <div>
+                  {<GetUsernameById id={friendRequest.from as string} />} wants
+                  to be friends with you
+                </div>
+                <button
+                  onClick={() => {
+                    acceptFriendRequest(friendRequest._id as string)
+                  }}
+                >
+                  Accept
+                </button>
+                <button
+                  onClick={() => {
+                    declineFriendRequest(friendRequest._id as string)
+                  }}
+                >
+                  Decline
+                </button>
               </>
             </li>
           ) : null
