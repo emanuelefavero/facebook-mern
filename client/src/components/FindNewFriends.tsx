@@ -15,6 +15,9 @@ function FindNewFriends() {
     <div>
       <h2>Find New Friends</h2>
 
+      {/* TODO: implement a user search on all Users (search how on the web) */}
+      {/* THEN, remember to hide the current logged in user by the result (DO IT ONLY AFTER THE SEARCH FEATURE IS IMPLEMENTED) */}
+
       <input
         type='text'
         placeholder='New friend username'

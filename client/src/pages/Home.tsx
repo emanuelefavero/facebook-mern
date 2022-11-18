@@ -27,8 +27,13 @@ function Home() {
 
   return (
     <div>
+      {/* Greet User */}
       <h1>Hello {user?.username}</h1>
+
+      {/* TODO: Implement a user search inside FindNewFriends component */}
       <FindNewFriends />
+
+      {/* Display Friends */}
       <h2>Friends</h2>
 
       {userFriends.length > 0 ? (
@@ -41,9 +46,11 @@ function Home() {
         <p>You have no friends</p>
       )}
 
+      {/* Display Friend Requests */}
       <h2>Friend Requests</h2>
       <ul>
         {friendRequests.map((friendRequest) => {
+          // Check if friend request is not from user and its to user
           return friendRequest.from !== user?._id &&
             friendRequest.to === user?._id ? (
             <li key={friendRequest._id}>

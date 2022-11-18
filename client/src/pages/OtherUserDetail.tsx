@@ -14,6 +14,8 @@ function UserDetail() {
     getUser,
     userFriends,
     getUserFriends,
+    userFriendRequests,
+    getUserFriendRequests,
   } = useContext(UserContext)
 
   const { createFriendRequest, getFriendRequests } =
@@ -26,13 +28,13 @@ function UserDetail() {
     getOtherUserByUsername(username as string)
     getFriendRequests()
     getUserFriends(user?.username as string)
+    getUserFriendRequests(user?.username as string)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const [isFriend, setIsFriend] = useState(false)
-
   // check if user is already friends with other user
+  const [isFriend, setIsFriend] = useState(false)
   useEffect(() => {
     setIsFriend(false)
     if (userFriends.length > 0) {
@@ -44,15 +46,30 @@ function UserDetail() {
     }
   }, [userFriends, otherUser])
 
+  // check if user has already sent a friend request to other user
+  const [hasSentFriendRequest, setHasSentFriendRequest] = useState(false)
+  useEffect(() => {
+    setHasSentFriendRequest(false)
+    if (userFriendRequests.length > 0) {
+      userFriendRequests.forEach((friendRequest) => {
+        if (friendRequest.to === otherUser?._id) {
+          setHasSentFriendRequest(true)
+        }
+      })
+    }
+  }, [userFriendRequests, otherUser])
+
   return (
     <>
       {otherUser?.username ? (
         <>
           <h2>{otherUser.username}</h2>
 
-          {/* If user is already friend with other user, hide button */}
+          {/* If user is already friend with other user or if the friend request has already been sent, hide 'Add Friend' button */}
           {isFriend ? (
             <p>{otherUser?.username} is your friend</p>
+          ) : hasSentFriendRequest ? (
+            <p>You sent a friend request to {otherUser?.username}</p>
           ) : (
             <button
               onClick={() => {
@@ -63,7 +80,6 @@ function UserDetail() {
                   to: otherUser?.username as string,
                 })
               }}
-              // TODO: sDisable the button if the user is already friends with the other user or if a friend request has already been sent
             >
               Add Friend
             </button>
