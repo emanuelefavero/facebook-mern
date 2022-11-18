@@ -25,7 +25,6 @@ function UserDetail() {
 
   return (
     <>
-      {user?.username}
       {otherUser?.username ? (
         <>
           <h2>{otherUser.username}</h2>
@@ -39,12 +38,10 @@ function UserDetail() {
                 to: otherUser?.username as string,
               })
             }}
-            // TODO: sDisable the button if the user is already friends with the other user (check if otherUser is in user.friends or friendRequests array)
+            // TODO: sDisable the button if the user is already friends with the other user or if a friend request has already been sent
           >
             Add Friend
           </button>
-          {/* 1. */}
-          {/* TODO: Add 'Request Friend' button here that will call createFriendRequest method (from FriendRequestContext). This method should pass { from: user.username and to: otherUser.username } as argument  */}
         </>
       ) : (
         <h2>User Not Found...</h2>

@@ -26,31 +26,22 @@ function Home() {
       <FindNewFriends />
       <h2>Friends</h2>
       {/* TODO: AFTER friend requests, Insert friend here (UserContext) */}
-
-      {/* BEWARE: Start from OtherUserDetail.tsx (create friend request) */}
-
       {/* 2. */}
-      {/* TODO: Insert get friend requests here (UserContext) and add accept and decline methods under each request */}
+      {/* TODO: add accept and decline methods under each request */}
 
       <h2>Friend Requests</h2>
       {/* Display friend requests */}
       <ul>
         {friendRequests.map((friendRequest) => {
-          return friendRequest.from === user?._id ? (
+          return friendRequest.from !== user?._id &&
+            friendRequest.to === user?._id ? (
             <li key={friendRequest._id}>
               <>
                 {<GetUsernameById id={friendRequest.from as string} />} wants to
-                be friends with{' '}
-                {<GetUsernameById id={friendRequest.to as string} />}
+                be friends with you
               </>
             </li>
           ) : null
-        })}
-      </ul>
-
-      <ul>
-        {userFriends.map((friend) => {
-          return <li key={friend.username}>{friend.username}</li>
         })}
       </ul>
     </div>
