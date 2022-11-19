@@ -6,8 +6,6 @@ import FriendRequestContext from '../context/FriendRequestContext'
 
 // IMPORT COMPONENTS
 import GetUsernameById from '../components/GetUsernameById'
-
-// NOTE:
 import SearchInput from '../components/SearchInput'
 
 function Home() {
@@ -29,13 +27,13 @@ function Home() {
 
   return (
     <div>
-      {/* Greet User */}
+      {/* GREET USER */}
       <h1>Hello {user?.username}</h1>
 
-      {/* NOTE: */}
+      {/* SEARCH */}
       <SearchInput />
 
-      {/* Display Friends */}
+      {/* DISPLAY FRIENDS */}
       <h2>Friends</h2>
 
       {userFriends.length > 0 ? (
@@ -48,7 +46,7 @@ function Home() {
         <p>You have no friends</p>
       )}
 
-      {/* Display Friend Requests */}
+      {/* DISPLAY FRIEND REQUESTS */}
       <h2>Friend Requests</h2>
       <ul>
         {friendRequests.map((friendRequest) => {

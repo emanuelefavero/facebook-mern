@@ -65,6 +65,7 @@ function UserDetail() {
         <>
           <h2>{otherUser.username}</h2>
 
+          {/* ADD FRIEND */}
           {/* If user is already friend with other user or if the friend request has already been sent, hide 'Add Friend' button */}
           {isFriend ? (
             <p>{otherUser?.username} is your friend</p>
