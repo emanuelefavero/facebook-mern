@@ -231,3 +231,54 @@ exports.getUserFriendRequests = (req, res, next) => {
       }
     })
 }
+
+// get user posts
+// exports.getUserPosts = (req, res, next) => {
+//   User.findOne({ username: req.params.username })
+//     .populate('posts')
+//     .exec((err, foundUser) => {
+//       if (err) {
+//         return next(err)
+//       }
+
+//       if (foundUser) {
+//         res.status(200).json({ posts: foundUser.posts })
+//       } else {
+//         res.status(404).json({ message: 'User not found.' })
+//       }
+//     })
+// }
+
+// get lastPost virtual
+exports.getLastPost = (req, res, next) => {
+  User.findOne({ username: req.params.username })
+    .populate('lastPost')
+    .exec((err, foundUser) => {
+      if (err) {
+        return next(err)
+      }
+
+      if (foundUser) {
+        res.status(200).json({ lastPost: foundUser.lastPost })
+      } else {
+        res.status(404).json({ message: 'User not found.' })
+      }
+    })
+}
+
+// get last ten posts
+exports.getLastTenPosts = (req, res, next) => {
+  User.findOne({ username: req.params.username })
+    .populate('lastTenPosts')
+    .exec((err, foundUser) => {
+      if (err) {
+        return next(err)
+      }
+
+      if (foundUser) {
+        res.status(200).json({ lastTenPosts: foundUser.lastTenPosts })
+      } else {
+        res.status(404).json({ message: 'User not found.' })
+      }
+    })
+}

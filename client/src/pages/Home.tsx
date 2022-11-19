@@ -7,6 +7,7 @@ import FriendRequestContext from '../context/FriendRequestContext'
 // IMPORT COMPONENTS
 import GetUsernameById from '../components/GetUsernameById'
 import SearchInput from '../components/SearchInput'
+import Posts from '../components/Posts'
 
 function Home() {
   const { user, getUser, userFriends, getUserFriends } = useContext(UserContext)
@@ -33,8 +34,15 @@ function Home() {
       {/* SEARCH */}
       <SearchInput />
 
-      {/* DISPLAY FRIENDS */}
+      {/* FRIENDS */}
       <h2>Friends</h2>
+
+      {userFriends.length > 0 && (
+        <h3>
+          You have {userFriends.length.toString()} friend
+          {userFriends.length > 1 && 's'}
+        </h3>
+      )}
 
       {userFriends.length > 0 ? (
         userFriends.map((friend) => (
@@ -46,7 +54,7 @@ function Home() {
         <p>You have no friends</p>
       )}
 
-      {/* DISPLAY FRIEND REQUESTS */}
+      {/* FRIEND REQUESTS */}
       <h2>Friend Requests</h2>
       <ul>
         {friendRequests.map((friendRequest) => {
@@ -78,6 +86,9 @@ function Home() {
           ) : null
         })}
       </ul>
+
+      {/* POSTS */}
+      <Posts />
     </div>
   )
 }

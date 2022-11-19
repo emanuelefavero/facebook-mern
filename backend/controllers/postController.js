@@ -1,0 +1,182 @@
+const Post = require('../models/post')
+const User = require('../models/user')
+
+// Create a new post
+exports.createPost = async (req, res) => {
+  try {
+    // Find the user that created the post
+    const user = await User.findOne({
+      username: req.body.username,
+    })
+
+    // Create a new post
+    const post = new Post({
+      content: req.body.content,
+      author: user,
+      createdAt: Date.now(),
+    })
+
+    // Save the post
+    await post.save()
+
+    // Add the post to the user that created it
+    user.posts.push(post)
+
+    // Save the user that created the post
+    await user.save()
+
+    // Send the post
+    res.status(201).json(post)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+// Get all posts
+exports.getPosts = async (req, res) => {
+  try {
+    // Find all posts
+    const posts = await Post.find()
+      .populate('author')
+      .sort({ createdAt: -1 })
+      // Limit the posts to 100
+      .limit(100)
+      .exec()
+
+    // Send all posts as json
+    res.status(200).json(posts)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+// TODO: (In the future) Limit the posts results to n posts and get more posts when the user scrolls down or clicks a button (use mongoose skip and limit)
+
+// Get a post by id
+exports.getPostById = async (req, res) => {
+  try {
+    // Find the post
+    const post = await Post.findById(req.params.id)
+
+    // Send the post
+    res.status(200).json(post)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+// Get a post
+exports.getPost = async (req, res) => {
+  try {
+    // Find the post
+    const post = await Post.findOne({
+      content: req.body.content,
+    })
+
+    // Send the post
+    res.status(200).json(post)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+// Update a post
+exports.updatePost = async (req, res) => {
+  try {
+    // Find the post
+    const post = await Post.findById(req.params.id)
+
+    // Update the post
+    post.content = req.body.content
+
+    // Save the post
+    await post.save()
+
+    // Send the post
+    res.status(201).json(post)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+// Delete a post
+exports.deletePost = async (req, res) => {
+  try {
+    // Find the post
+    const post = await Post.findById(req.params.id)
+
+    // TODO: Delete the post if the user that created it is the user that is logged in (do it in the front end). You simply check if the user that created the post is the user that is logged in and if it is you show the delete button
+
+    // Delete the post
+    await Post.findByIdAndDelete(req.params.id)
+
+    // Send the post
+    res.status(200).json(post)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+// Get user posts
+exports.getUserPosts = async (req, res) => {
+  try {
+    // Find the user
+    const user = await User.findOne({ username: req.params.username })
+
+    // Find the user posts
+    const posts = await Post.find({ author: user })
+
+    // Send the user posts
+    res.status(200).json(posts)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+// NOTE: EXPERIMENTAL FEATURES
+// Get all posts from friends
+// exports.getFriendsPosts = async (req, res) => {
+//   try {
+//     // Find the user
+//     const user = await User.findOne({ username: req.params.username })
+
+//     // Find the user friends
+//     const friends = await User.find({ friends: user })
+
+//     // Find the posts from the user friends
+//     const posts = await Post.find({ author: friends })
+
+//     // Send the posts from the user friends
+//     res.send(posts)
+//   } catch (err) {
+//     res.status(500).send(err)
+//   }
+// }
+
+// Get all posts from friends using a loop and assigning the posts to an array
+// exports.getFriendsPosts = async (req, res) => {
+//   try {
+//     // Find the user
+//     const user = await User.findOne({ username: req.params.username })
+
+//     // Find the user friends
+//     const friends = await User.find({ friends: user })
+
+//     // Create an array to store the posts
+//     const posts = []
+
+//     // Loop through the friends
+//     for (let i = 0; i < friends.length; i++) {
+//       // Find the posts from the user friends
+//       const friendPosts = await Post.find({ author: friends[i] })
+
+//       // Add the posts to the posts array
+//       posts.push(...friendPosts)
+//     }
+
+//     // Send the posts from the user friends
+//     res.status(200).json(posts)
+//   } catch (err) {
+//     res.status(500).send(err)
+//   }
+// }

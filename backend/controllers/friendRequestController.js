@@ -46,6 +46,8 @@ exports.acceptFriendRequest = async (req, res) => {
     // Find the user that received the friend request
     const toUser = await User.findById(friendRequest.to)
 
+    // FIX: Check if the user that sent the friend request is already a friend to prevent duplicates
+
     // Add the user that sent the friend request to the user that received it
     toUser.friends.push(fromUser)
     // Save the user that received the friend request

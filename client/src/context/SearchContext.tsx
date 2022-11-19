@@ -26,6 +26,7 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
     try {
       const { data } = await axios.get(`api/search?q=${query}`)
       setSearchResults(data.users)
+      console.log(data.users)
     } catch (error) {
       console.log(error)
     }

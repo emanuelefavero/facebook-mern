@@ -80,6 +80,7 @@ function UserDetail() {
                   from: user?.username as string,
                   to: otherUser?.username as string,
                 })
+                window.location.reload()
               }}
             >
               Add Friend
