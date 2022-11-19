@@ -1,55 +1,19 @@
-import { useState, useEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import axios from 'axios'
-import type { AxiosError } from 'axios'
 
 // IMPORT INTERFACES
 import PostInterface from '../interfaces/PostInterface'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
+import PostsContext from '../context/PostsContext'
 
 axios.defaults.baseURL = 'http://localhost:4000'
 
 function Posts() {
-  const { user, getUser } = useContext(UserContext)
-
-  const [postContent, setPostContent] = useState('')
-  const [posts, setPosts] = useState<PostInterface[] | []>([])
-
-  const createPost = async () => {
-    window.location.reload()
-    await axios({
-      method: 'POST',
-      url: '/api/posts',
-      data: {
-        content: postContent,
-        author: user,
-        username: user?.username,
-      },
-    })
-      .then((res) => {
-        console.log(res.data)
-        setPostContent('')
-      })
-      .catch((err: AxiosError) => {
-        console.log(err)
-      })
-  }
-
-  // Get all posts
-  const getPosts = async () => {
-    await axios({
-      method: 'GET',
-      url: '/api/posts',
-    })
-      .then((res) => {
-        // console.log(res.data)
-        setPosts(res.data)
-      })
-      .catch((err: AxiosError) => {
-        console.log(err)
-      })
-  }
+  const { getUser } = useContext(UserContext)
+  const { postContent, setPostContent, posts, createPost, getPosts } =
+    useContext(PostsContext)
 
   useEffect(() => {
     getUser()
@@ -76,8 +40,6 @@ function Posts() {
           <h6>{post.createdAt as string}</h6>
         </div>
       ))}
-
-      <h2>Posts</h2>
     </>
   )
 }

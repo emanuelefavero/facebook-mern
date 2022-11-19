@@ -18,6 +18,7 @@ import SearchResults from './pages/SearchResults'
 import { UserProvider } from './context/UserContext'
 import { FriendRequestProvider } from './context/FriendRequestContext'
 import { SearchProvider } from './context/SearchContext'
+import { PostsProvider } from './context/PostsContext'
 
 // Import Context
 import UserContext from './context/UserContext'
@@ -36,42 +37,44 @@ function App() {
       <Router>
         <UserProvider>
           <FriendRequestProvider>
-            <SearchProvider>
-              <Header />
-              <main>
-                <Routes>
-                  {/* HOME */}
-                  <Route
-                    path='/'
-                    element={
-                      <ProtectedRoute redirectPath='/login'>
-                        <Home />
-                      </ProtectedRoute>
-                    }
-                  />
+            <PostsProvider>
+              <SearchProvider>
+                <Header />
+                <main>
+                  <Routes>
+                    {/* HOME */}
+                    <Route
+                      path='/'
+                      element={
+                        <ProtectedRoute redirectPath='/login'>
+                          <Home />
+                        </ProtectedRoute>
+                      }
+                    />
 
-                  {/* AUTH */}
-                  <Route path='/login' element={<Login />} />
-                  <Route path='/register' element={<Register />} />
+                    {/* AUTH */}
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
 
-                  {/* NOT FOUND */}
-                  <Route path='*' element={<NotFound />} />
+                    {/* NOT FOUND */}
+                    <Route path='*' element={<NotFound />} />
 
-                  {/* SEARCH */}
-                  <Route path='/search' element={<SearchResults />} />
+                    {/* SEARCH */}
+                    <Route path='/search' element={<SearchResults />} />
 
-                  {/* OTHER USER DETAIL */}
-                  <Route
-                    path='/user/:username'
-                    element={
-                      <ProtectedRoute redirectPath='/login'>
-                        <OtherUserDetail />
-                      </ProtectedRoute>
-                    }
-                  />
-                </Routes>
-              </main>
-            </SearchProvider>
+                    {/* OTHER USER DETAIL */}
+                    <Route
+                      path='/user/:username'
+                      element={
+                        <ProtectedRoute redirectPath='/login'>
+                          <OtherUserDetail />
+                        </ProtectedRoute>
+                      }
+                    />
+                  </Routes>
+                </main>
+              </SearchProvider>
+            </PostsProvider>
           </FriendRequestProvider>
         </UserProvider>
       </Router>
