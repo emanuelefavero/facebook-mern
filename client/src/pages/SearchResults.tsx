@@ -1,29 +1,15 @@
-import { useEffect, useState, useContext } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import axios from 'axios'
-
-// IMPORT INTERFACES
-import UserInterface from '../interfaces/UserInterface'
+import { useEffect, useContext } from 'react'
+import { Link } from 'react-router-dom'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
+import SearchContext from '../context/SearchContext'
 
 function SearchResults() {
   const { user, getUser } = useContext(UserContext)
-
-  const [searchResults, setSearchResults] = useState<UserInterface[] | []>([])
-  const location = useLocation()
-  const query = new URLSearchParams(location.search).get('query')
+  const { searchResults, searchUser } = useContext(SearchContext)
 
   useEffect(() => {
-    const searchUser = async () => {
-      try {
-        const { data } = await axios.get(`api/search?q=${query}`)
-        setSearchResults(data.users)
-      } catch (error) {
-        console.log(error)
-      }
-    }
     searchUser()
     getUser()
 

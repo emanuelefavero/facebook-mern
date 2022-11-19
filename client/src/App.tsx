@@ -1,7 +1,5 @@
 import styles from './App.module.css'
 import { useContext, useEffect } from 'react'
-import { UserProvider } from './context/UserContext'
-import { FriendRequestProvider } from './context/FriendRequestContext'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // Import Components
@@ -15,6 +13,11 @@ import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 import OtherUserDetail from './pages/OtherUserDetail'
 import SearchResults from './pages/SearchResults'
+
+// Import Context Provider
+import { UserProvider } from './context/UserContext'
+import { FriendRequestProvider } from './context/FriendRequestContext'
+import { SearchProvider } from './context/SearchContext'
 
 // Import Context
 import UserContext from './context/UserContext'
@@ -30,46 +33,48 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <UserProvider>
-        <FriendRequestProvider>
-          <Router>
-            <Header />
-            <main>
-              <Routes>
-                {/* HOME */}
-                <Route
-                  path='/'
-                  element={
-                    <ProtectedRoute redirectPath='/login'>
-                      <Home />
-                    </ProtectedRoute>
-                  }
-                />
+      <Router>
+        <UserProvider>
+          <FriendRequestProvider>
+            <SearchProvider>
+              <Header />
+              <main>
+                <Routes>
+                  {/* HOME */}
+                  <Route
+                    path='/'
+                    element={
+                      <ProtectedRoute redirectPath='/login'>
+                        <Home />
+                      </ProtectedRoute>
+                    }
+                  />
 
-                {/* AUTH */}
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
+                  {/* AUTH */}
+                  <Route path='/login' element={<Login />} />
+                  <Route path='/register' element={<Register />} />
 
-                {/* NOT FOUND */}
-                <Route path='*' element={<NotFound />} />
+                  {/* NOT FOUND */}
+                  <Route path='*' element={<NotFound />} />
 
-                {/* SEARCH */}
-                <Route path='/search' element={<SearchResults />} />
+                  {/* SEARCH */}
+                  <Route path='/search' element={<SearchResults />} />
 
-                {/* OTHER USER DETAIL */}
-                <Route
-                  path='/user/:username'
-                  element={
-                    <ProtectedRoute redirectPath='/login'>
-                      <OtherUserDetail />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </main>
-          </Router>
-        </FriendRequestProvider>
-      </UserProvider>
+                  {/* OTHER USER DETAIL */}
+                  <Route
+                    path='/user/:username'
+                    element={
+                      <ProtectedRoute redirectPath='/login'>
+                        <OtherUserDetail />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Routes>
+              </main>
+            </SearchProvider>
+          </FriendRequestProvider>
+        </UserProvider>
+      </Router>
     </div>
   )
 }

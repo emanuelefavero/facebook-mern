@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+// IMPORT CONTEXT
+import SearchContext from '../context/SearchContext'
+
 function SearchInput() {
-  const [search, setSearch] = useState('')
+  const { search, setSearch } = useContext(SearchContext)
+
   const navigate = useNavigate()
 
   return (

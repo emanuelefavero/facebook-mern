@@ -175,9 +175,9 @@ exports.searchUser = async (req, res, next) => {
     if (users.length < 1) {
       res.status(404).json({ message: 'No users found.' })
       // throw new ErrorHandler(404, 'No users found.')
+    } else {
+      res.status(201).json({ users })
     }
-
-    res.status(201).json({ users })
   } catch (err) {
     next(err)
   }
