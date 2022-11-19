@@ -164,6 +164,25 @@ exports.getUserByUsername = (req, res, next) => {
   })
 }
 
+// search user
+exports.searchUser = async (req, res, next) => {
+  try {
+    const { q } = req.query
+    const users = await User.find({
+      username: { $regex: q, $options: 'i' },
+    })
+
+    if (users.length < 1) {
+      res.status(404).json({ message: 'No users found.' })
+      // throw new ErrorHandler(404, 'No users found.')
+    }
+
+    res.status(201).json({ users })
+  } catch (err) {
+    next(err)
+  }
+}
+
 // get user username by id as string
 exports.getUsernameById = (req, res, next) => {
   User.findById(req.params.id).exec((err, foundUser) => {

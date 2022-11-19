@@ -25,8 +25,6 @@ const UserContext = createContext({
   setLoginUsername: (username: string) => {},
   loginPassword: '',
   setLoginPassword: (password: string) => {},
-  newFriendUsernameInput: '',
-  setNewFriendUsernameInput: (username: string) => {},
 
   register: () => {},
   login: () => {},
@@ -46,7 +44,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [registerPassword, setRegisterPassword] = useState('')
   const [loginUsername, setLoginUsername] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
-  const [newFriendUsernameInput, setNewFriendUsernameInput] = useState('')
 
   const [userFriends, setUserFriends] = useState<UserInterface[] | []>([])
   const [userFriendRequests, setUserFriendRequests] = useState<
@@ -222,8 +219,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         setLoginUsername,
         loginPassword,
         setLoginPassword,
-        newFriendUsernameInput,
-        setNewFriendUsernameInput,
 
         register,
         login,

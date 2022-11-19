@@ -14,6 +14,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 import OtherUserDetail from './pages/OtherUserDetail'
+import SearchResults from './pages/SearchResults'
 
 // Import Context
 import UserContext from './context/UserContext'
@@ -52,6 +53,10 @@ function App() {
                 {/* NOT FOUND */}
                 <Route path='*' element={<NotFound />} />
 
+                {/* SEARCH */}
+                <Route path='/search' element={<SearchResults />} />
+
+                {/* OTHER USER DETAIL */}
                 <Route
                   path='/user/:username'
                   element={

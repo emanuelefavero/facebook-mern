@@ -5,8 +5,10 @@ import UserContext from '../context/UserContext'
 import FriendRequestContext from '../context/FriendRequestContext'
 
 // IMPORT COMPONENTS
-import FindNewFriends from '../components/FindNewFriends'
 import GetUsernameById from '../components/GetUsernameById'
+
+// NOTE:
+import SearchInput from '../components/SearchInput'
 
 function Home() {
   const { user, getUser, userFriends, getUserFriends } = useContext(UserContext)
@@ -30,8 +32,8 @@ function Home() {
       {/* Greet User */}
       <h1>Hello {user?.username}</h1>
 
-      {/* TODO: Implement a user search inside FindNewFriends component */}
-      <FindNewFriends />
+      {/* NOTE: */}
+      <SearchInput />
 
       {/* Display Friends */}
       <h2>Friends</h2>

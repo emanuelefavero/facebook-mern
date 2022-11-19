@@ -3,4 +3,7 @@ export default interface UserInterface {
   username: string
   password: string
   role: string
+  friendRequests: string[]
+  friends: string[]
+  __v: number
 }
