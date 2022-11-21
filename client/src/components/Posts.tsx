@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import axios from 'axios'
 
 // IMPORT COMPONENTS
@@ -48,6 +48,27 @@ function Posts() {
       })
   }
 
+  // Add Comment to a post
+  const [commentContent, setCommentContent] = useState('')
+  const addComment = async (postId: string) => {
+    await axios({
+      method: 'PUT',
+      data: {
+        content: commentContent,
+        username: user?.username,
+      },
+      // withCredentials: true,
+      url: `/api/posts/${postId}/comments`,
+    })
+      .then((res) => {
+        // console.log(res.data)
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log(err.response?.data.message)
+      })
+  }
+
   return (
     <>
       {/* CREATE POST */}
@@ -88,18 +109,38 @@ function Posts() {
                   <p>Likes: {post?.likes?.length}</p>
                 </>
               ) : null}
+
+              {/* ADD COMMENT */}
+              {/* --Check if post content is not empty */}
+              {post?.content ? (
+                <>
+                  <input
+                    type='text'
+                    placeholder='Add a comment...'
+                    value={commentContent}
+                    onChange={(e) => setCommentContent(e.target.value)}
+                  />
+                  <button onClick={() => addComment(post?._id)}>Comment</button>
+                </>
+              ) : null}
+
+              {/* COMMENTS */}
+              {/* --Check for undefined */}
+              {post?.comments?.length > 0 ? (
+                <>
+                  <p>Comments: {post?.comments?.length}</p>
+                  {post?.comments?.map((comment: any) => (
+                    <div key={comment?._id ? comment?._id : uuidv4()}>
+                      <h5>{comment?.username}</h5>
+                      <p>{comment?.content}</p>
+                      <h6>{comment?.createdAt}</h6>
+                    </div>
+                  ))}
+                </>
+              ) : null}
             </div>
           ))}
       </div>
-
-      {/* DISPLAY ALL POSTS */}
-      {/* {posts.map((post: PostInterface) => (
-        <div key={post._id}>
-          <h4>{post.author?.username}</h4>
-          <p>{post.content}</p>
-          <h6>{post.createdAt as string}</h6>
-        </div>
-      ))} */}
     </>
   )
 }

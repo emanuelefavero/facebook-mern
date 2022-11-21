@@ -18,9 +18,6 @@ router.get('/search', userController.searchUser)
 
 // User
 router.get('/user', userController.getUser)
-
-// NOTE:
-
 router.get('/user/:username', userController.getUserByUsername)
 router.get('/user/:username/friends', userController.getUserFriends)
 router.get(
@@ -43,8 +40,13 @@ router.get('/friend-request/:id', friendRequestController.getFriendRequest)
 // Post
 router.post('/posts', postController.createPost)
 router.get('/posts', postController.getPosts)
+router.get('/posts/:id', postController.getPostById)
 
 // Post Likes
 router.post('/posts/:postId/like', postController.likePost)
+
+// Add a comment to a post
+router.put('/posts/:postId/comments', postController.addComment)
+router.get('/posts/:postId/comments', postController.getComments)
 
 module.exports = router

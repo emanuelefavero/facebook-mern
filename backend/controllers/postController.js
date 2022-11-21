@@ -32,6 +32,8 @@ exports.createPost = async (req, res) => {
   }
 }
 
+// TODO: (In the future) Limit the posts results to n posts and get more posts when the user scrolls down or clicks a button (use mongoose skip and limit)
+
 // Get all posts
 exports.getPosts = async (req, res) => {
   try {
@@ -50,13 +52,12 @@ exports.getPosts = async (req, res) => {
   }
 }
 
-// TODO: (In the future) Limit the posts results to n posts and get more posts when the user scrolls down or clicks a button (use mongoose skip and limit)
-
 // Get a post by id
 exports.getPostById = async (req, res) => {
   try {
     // Find the post
-    const post = await Post.findById(req.params.id)
+    const post = await Post.findById(req.params.id).populate('author')
+    // .populate('comments')
 
     // Send the post
     res.status(200).json(post)
@@ -161,6 +162,48 @@ exports.likePost = async (req, res) => {
       // Send the post
       res.status(200).json(post)
     }
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+// Add comment to post using mongoose $push and populate
+exports.addComment = async (req, res) => {
+  try {
+    // Define the comment
+    const comment = {
+      content: req.body.content,
+      username: req.body.username,
+      createdAt: Date.now(),
+    }
+
+    // Find the post and update it
+    const post = await Post.findByIdAndUpdate(
+      req.params.postId,
+      {
+        $push: { comments: comment },
+
+        // increase number of comments by one each time a comment is added
+        $inc: { numberOfComments: 1 },
+      },
+      { new: true }
+    )
+
+    // Send the post
+    res.status(200).json(post)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}
+
+// GET comments
+exports.getComments = async (req, res) => {
+  try {
+    // Find the post
+    const post = await Post.findById(req.params.postId)
+
+    // Send the comments
+    res.status(200).json(post.comments)
   } catch (err) {
     res.status(500).send(err)
   }
