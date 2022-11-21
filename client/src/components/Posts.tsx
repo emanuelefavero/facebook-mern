@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
-import { useEffect, useContext, useState } from 'react'
-import axios from 'axios'
+import { useEffect, useContext } from 'react'
 
 // IMPORT COMPONENTS
 import GetUsernameById from './GetUsernameById'
@@ -10,7 +9,7 @@ import UserContext from '../context/UserContext'
 import PostsContext from '../context/PostsContext'
 
 function Posts() {
-  const { getUser, user } = useContext(UserContext)
+  const { getUser } = useContext(UserContext)
   const {
     postContent,
     setPostContent,
@@ -19,6 +18,10 @@ function Posts() {
     userFriendsLastPosts,
     getUserPosts,
     getFriendsPosts,
+    likePost,
+    commentContent,
+    setCommentContent,
+    addComment,
   } = useContext(PostsContext)
 
   useEffect(() => {
@@ -28,46 +31,6 @@ function Posts() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  // Like a post
-  const likePost = async (postId: string) => {
-    await axios({
-      method: 'POST',
-      data: {
-        username: user?.username,
-      },
-      // withCredentials: true,
-      url: `/api/posts/${postId}/like`,
-    })
-      .then((res) => {
-        console.log(res.data)
-        window.location.reload()
-      })
-      .catch((err) => {
-        console.log(err.response?.data.message)
-      })
-  }
-
-  // Add Comment to a post
-  const [commentContent, setCommentContent] = useState('')
-  const addComment = async (postId: string) => {
-    await axios({
-      method: 'PUT',
-      data: {
-        content: commentContent,
-        username: user?.username,
-      },
-      // withCredentials: true,
-      url: `/api/posts/${postId}/comments`,
-    })
-      .then((res) => {
-        // console.log(res.data)
-        window.location.reload()
-      })
-      .catch((err) => {
-        console.log(err.response?.data.message)
-      })
-  }
 
   return (
     <>

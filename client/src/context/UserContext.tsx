@@ -37,6 +37,7 @@ const UserContext = createContext({
 })
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
+  // STATE
   const [user, setUser] = useState<UserInterface | null>(null)
   const [otherUser, setOtherUser] = useState<UserInterface | null>(null)
 
@@ -50,6 +51,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     FriendRequestInterface[] | []
   >([])
 
+  // POST: Register user
   const register = async () => {
     try {
       axios({
@@ -71,6 +73,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  // POST: Login user
   const login = async () => {
     await axios({
       method: 'POST',
@@ -91,6 +94,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       })
   }
 
+  // GET: Logout user
   const logout = async () => {
     axios({
       method: 'GET',

@@ -16,12 +16,14 @@ const SearchContext = createContext({
 })
 
 export function SearchProvider({ children }: { children: React.ReactNode }) {
+  // STATE
   const [search, setSearch] = useState('')
   const [searchResults, setSearchResults] = useState<UserInterface[] | []>([])
 
   const location = useLocation()
   const query = new URLSearchParams(location.search).get('query')
 
+  // Search user
   const searchUser = async () => {
     try {
       const { data } = await axios.get(`api/search?q=${query}`)

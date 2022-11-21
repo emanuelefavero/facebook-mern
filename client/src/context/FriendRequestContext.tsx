@@ -27,9 +27,7 @@ export function FriendRequestProvider({
     FriendRequestInterface[] | []
   >([])
 
-  // Create a friend request using an axios post request to this url: '/api/friend-request'
-  // The friend request object is added to the database and the friend request is returned.
-  // Log the returned friend request to the console.
+  // POST: Create friend request
   const createFriendRequest = async (friendRequest: FriendRequestInterface) => {
     try {
       const response = await axios.post('/api/friend-request', friendRequest)
@@ -39,9 +37,7 @@ export function FriendRequestProvider({
     }
   }
 
-  // Accept a friend request using an axios put request to this url: '/api/friend-request/:id'
-  // The friend request object is updated in the database and the friend request is returned.
-  // Log the returned friend request to the console.
+  // PUT: Accept friend request
   const acceptFriendRequest = async (friendRequestId: string) => {
     try {
       const response = await axios.put(
@@ -55,9 +51,7 @@ export function FriendRequestProvider({
     }
   }
 
-  // Decline a friend request using an axios delete request to this url: '/api/friend-request/:id'
-  // The friend request object is deleted from the database and the friend request is returned.
-  // Log the returned friend request to the console.
+  // DELETE: Decline friend request
   const declineFriendRequest = async (friendRequestId: string) => {
     try {
       const response = await axios.delete(
@@ -70,9 +64,7 @@ export function FriendRequestProvider({
     }
   }
 
-  // Get all friend requests using an axios get request to this url: '/api/friend-request'
-  // The friend requests are returned.
-  // Log the returned friend requests to the console.
+  // GET: Get friend requests
   const getFriendRequests = async () => {
     try {
       const response = await axios.get('/api/friend-request')

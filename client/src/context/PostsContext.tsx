@@ -21,18 +21,25 @@ const PostsContext = createContext({
   userFriendsLastPosts: [] as PostInterface[] | [],
   getUserPosts: () => {},
   getFriendsPosts: () => {},
+  likePost: (postId: string) => {},
+  commentContent: '',
+  setCommentContent: (content: string) => {},
+  addComment: (postId: string) => {},
 })
 
 export function PostsProvider({ children }: { children: React.ReactNode }) {
   const { user } = useContext(UserContext)
+
+  // STATE
   const [postContent, setPostContent] = useState('')
   const [posts, setPosts] = useState<PostInterface[] | []>([])
   const [userPosts, setUserPosts] = useState<PostInterface[] | []>([])
   const [userFriendsLastPosts, setUserFriendsLastPosts] = useState<
     PostInterface[] | []
   >([])
+  const [commentContent, setCommentContent] = useState('')
 
-  // Create a post
+  // POST: Create a post
   const createPost = async () => {
     window.location.reload()
     await axios({
@@ -53,7 +60,7 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
       })
   }
 
-  // Get all posts
+  // GET all posts
   const getPosts = async () => {
     await axios({
       method: 'GET',
@@ -106,6 +113,45 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
     })
   }
 
+  // POST: Like a post
+  const likePost = async (postId: string) => {
+    await axios({
+      method: 'POST',
+      data: {
+        username: user?.username,
+      },
+      // withCredentials: true,
+      url: `/api/posts/${postId}/like`,
+    })
+      .then((res) => {
+        console.log(res.data)
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log(err.response?.data.message)
+      })
+  }
+
+  // PUT: Add Comment to a post
+  const addComment = async (postId: string) => {
+    await axios({
+      method: 'PUT',
+      data: {
+        content: commentContent,
+        username: user?.username,
+      },
+      // withCredentials: true,
+      url: `/api/posts/${postId}/comments`,
+    })
+      .then((res) => {
+        // console.log(res.data)
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log(err.response?.data.message)
+      })
+  }
+
   return (
     <PostsContext.Provider
       value={{
@@ -118,6 +164,10 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
         userFriendsLastPosts,
         getUserPosts,
         getFriendsPosts,
+        likePost,
+        commentContent,
+        setCommentContent,
+        addComment,
       }}
     >
       {children}
