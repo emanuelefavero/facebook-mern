@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom'
 import UserContext from '../context/UserContext'
 import FriendRequestContext from '../context/FriendRequestContext'
 
+// TODO: Add user profile picture, user posts
+
 function UserDetail() {
   const {
     otherUser,

@@ -2,7 +2,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useContext } from 'react'
 
 // IMPORT COMPONENTS
-// import GetUsernameById from './GetUsernameById'
 import GetUserByUsername from './GetUserByUsername'
 import GetUserById from './GetUserById'
 
@@ -62,10 +61,15 @@ function Posts() {
         {userFriendsLastPosts!.length > 0 &&
           userFriendsLastPosts!.map((post: any) => (
             <div key={post?._id ? post?._id : uuidv4()}>
-              {/* <GetUsernameById id={post?.author} /> */}
-              <GetUserById id={post?.author} />
-              <p>{post?.content}</p>
-              <h6>{post?.createdAt}</h6>
+              {/* --Check if post has content */}
+              {post?.content && (
+                <>
+                  {/* --Username and profilePicture Link */}
+                  <GetUserById id={post?.author} />
+                  <p>{post?.content}</p>
+                  <h6>{post?.createdAt}</h6>
+                </>
+              )}
 
               {/* POST LIKES */}
               {/* --Check for undefined */}
@@ -97,6 +101,9 @@ function Posts() {
                   <p>Comments: {post?.comments?.length}</p>
                   {post?.comments?.map((comment: any) => (
                     <div key={comment?._id ? comment?._id : uuidv4()}>
+                      {/* TODO: Check if comment?.username is equal to user.username. If so, don't show username link, just the text OR show a link to the home (check how I implemented this on SearchResults.tsx) */}
+
+                      {/* --Username and profilePicture Link */}
                       <GetUserByUsername username={comment?.username} />
                       <p>{comment?.content}</p>
                       <h6>{comment?.createdAt}</h6>

@@ -30,7 +30,6 @@ const UserContext = createContext({
   login: () => {},
   logout: () => {},
   getUser: () => {},
-  // getUserByUsername: (username: string) => {},
   getOtherUserByUsername: (username: string) => {},
   getUserFriends: (username: string) => {},
   getUserFriendRequests: (username: string) => {},
@@ -129,25 +128,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       })
   }
 
-  // GET user by username
-  // const getUserByUsername = async (username: string) => {
-  //   await axios({
-  //     method: 'GET',
-  //     withCredentials: true,
-  //     url: `/api/user/${username}`,
-  //   })
-  //     .then((res) => {
-  //       if (res.data.user) {
-  //         setUser(res.data.user)
-  //       } else {
-  //         setUser(null)
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.response?.data.message)
-  //     })
-  // }
-
   // GET other user by username
   const getOtherUserByUsername = async (username: string) => {
     await axios({
@@ -228,7 +208,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         login,
         logout,
         getUser,
-        // getUserByUsername,
         getOtherUserByUsername,
         getUserFriends,
         getUserFriendRequests,

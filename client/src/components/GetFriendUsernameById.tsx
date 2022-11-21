@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom'
 
 interface Props {
   id: string
+  friendProfilePictureUrl: string
 }
 
-function GetUsernameById({ id }: Props) {
+function GetFriendUsernameById({ id, friendProfilePictureUrl }: Props) {
   const [displayUsername, setDisplayUsername] = useState('')
 
   // GET username by id as string
-  const getUsernameById = async (id: string) => {
+  const GetFriendUsernameById = async (id: string) => {
     if (id === undefined) {
       return
     } else {
@@ -33,16 +34,28 @@ function GetUsernameById({ id }: Props) {
   }
 
   useEffect(() => {
-    getUsernameById(id)
+    GetFriendUsernameById(id)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
-      <Link to={`/user/${displayUsername}`}>{displayUsername}</Link>
+      {/* PROFILE PICTURE */}
+      <Link to={`/user/${displayUsername}`}>
+        <img
+          src={friendProfilePictureUrl}
+          alt='Profile'
+          width='50'
+          height='50'
+          style={{ borderRadius: '50%' }}
+        />
+
+        {/* USERNAME */}
+        {displayUsername}
+      </Link>
     </>
   )
 }
 
-export default GetUsernameById
+export default GetFriendUsernameById

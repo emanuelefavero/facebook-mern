@@ -18,7 +18,6 @@ function GetUserByUsername({ username }: Props) {
       await axios({
         method: 'GET',
         withCredentials: true,
-        // url: `/api/user/user-by-username/${username}`,
         url: `/api/user/${username}`,
       })
         .then((res) => {
@@ -37,13 +36,13 @@ function GetUserByUsername({ username }: Props) {
   }
 
   useEffect(() => {
-    // getUsernameById(id)
     getUserByUsername(username)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
+      {/* PROFILE PICTURE */}
       <Link to={`/user/${displayUsername}`}>
         <img
           src={displayProfilePictureUrl}
@@ -53,6 +52,7 @@ function GetUserByUsername({ username }: Props) {
           style={{ borderRadius: '50%' }}
         />
 
+        {/* USERNAME */}
         {displayUsername}
       </Link>
     </>

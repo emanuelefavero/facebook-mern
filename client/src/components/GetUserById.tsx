@@ -6,32 +6,9 @@ interface Props {
   id: string
 }
 
-function GetUsernameById({ id }: Props) {
+function GetUserById({ id }: Props) {
   const [displayUsername, setDisplayUsername] = useState('')
   const [displayProfilePictureUrl, setDisplayProfilePictureUrl] = useState('')
-
-  // GET username by id as string
-  // const getUsernameById = async (id: string) => {
-  //   if (id === undefined) {
-  //     return
-  //   } else {
-  //     await axios({
-  //       method: 'GET',
-  //       withCredentials: true,
-  //       url: `/api/user/username-by-id/${id}`,
-  //     })
-  //       .then((res) => {
-  //         if (res.data.username) {
-  //           setDisplayUsername(res.data.username)
-  //         } else {
-  //           setDisplayUsername('')
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err.response?.data.message)
-  //       })
-  //   }
-  // }
 
   // GET user by id as string
   const getUserById = async (id: string) => {
@@ -59,13 +36,13 @@ function GetUsernameById({ id }: Props) {
   }
 
   useEffect(() => {
-    // getUsernameById(id)
     getUserById(id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
+      {/* PROFILE PICTURE */}
       <Link to={`/user/${displayUsername}`}>
         <img
           src={displayProfilePictureUrl}
@@ -75,10 +52,11 @@ function GetUsernameById({ id }: Props) {
           style={{ borderRadius: '50%' }}
         />
 
+        {/* USERNAME */}
         {displayUsername}
       </Link>
     </>
   )
 }
 
-export default GetUsernameById
+export default GetUserById

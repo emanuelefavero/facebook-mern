@@ -6,10 +6,10 @@ import UserContext from '../context/UserContext'
 import FriendRequestContext from '../context/FriendRequestContext'
 
 // IMPORT COMPONENTS
-import GetUsernameById from '../components/GetUsernameById'
+import GetFriendUsernameById from '../components/GetFriendUsernameById'
+import GetUserById from '../components/GetUserById'
 import SearchInput from '../components/SearchInput'
 import Posts from '../components/Posts'
-// import ProfilePicture from '../components/ProfilePicture'
 
 // FIX: remove this after moving profile picture functions to context
 axios.defaults.baseURL = 'http://localhost:4000'
@@ -54,7 +54,6 @@ function Home() {
 
   return (
     <div>
-      {/* TODO: add - profile picture to displayed friends here and in other users detail page */}
       {/* PROFILE PICTURE */}
       <div className='profile-picture-container'>
         <button
@@ -109,15 +108,10 @@ function Home() {
       {userFriends.length > 0 ? (
         userFriends.map((friend) => (
           <div key={friend._id}>
-            <img
-              src={friend?.profilePictureUrl}
-              alt='Profile'
-              width='50'
-              height='50'
-              style={{ borderRadius: '50%' }}
+            <GetFriendUsernameById
+              id={friend._id}
+              friendProfilePictureUrl={friend?.profilePictureUrl as string}
             />
-
-            <GetUsernameById id={friend._id} />
           </div>
         ))
       ) : (
@@ -134,9 +128,10 @@ function Home() {
             <li key={friendRequest._id}>
               <>
                 <div>
-                  {<GetUsernameById id={friendRequest.from as string} />} wants
-                  to be friends with you
+                  <GetUserById id={friendRequest.from as string} />
+                  wants to be friends with you
                 </div>
+
                 <button
                   onClick={() => {
                     acceptFriendRequest(friendRequest._id as string)
