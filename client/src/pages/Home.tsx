@@ -109,6 +109,14 @@ function Home() {
       {userFriends.length > 0 ? (
         userFriends.map((friend) => (
           <div key={friend._id}>
+            <img
+              src={friend?.profilePictureUrl}
+              alt='Profile'
+              width='50'
+              height='50'
+              style={{ borderRadius: '50%' }}
+            />
+
             <GetUsernameById id={friend._id} />
           </div>
         ))

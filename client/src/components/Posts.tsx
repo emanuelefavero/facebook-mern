@@ -2,7 +2,9 @@ import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useContext } from 'react'
 
 // IMPORT COMPONENTS
-import GetUsernameById from './GetUsernameById'
+// import GetUsernameById from './GetUsernameById'
+import GetUserByUsername from './GetUserByUsername'
+import GetUserById from './GetUserById'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
@@ -60,7 +62,8 @@ function Posts() {
         {userFriendsLastPosts!.length > 0 &&
           userFriendsLastPosts!.map((post: any) => (
             <div key={post?._id ? post?._id : uuidv4()}>
-              <GetUsernameById id={post?.author} />
+              {/* <GetUsernameById id={post?.author} /> */}
+              <GetUserById id={post?.author} />
               <p>{post?.content}</p>
               <h6>{post?.createdAt}</h6>
 
@@ -94,7 +97,7 @@ function Posts() {
                   <p>Comments: {post?.comments?.length}</p>
                   {post?.comments?.map((comment: any) => (
                     <div key={comment?._id ? comment?._id : uuidv4()}>
-                      <h5>{comment?.username}</h5>
+                      <GetUserByUsername username={comment?.username} />
                       <p>{comment?.content}</p>
                       <h6>{comment?.createdAt}</h6>
                     </div>

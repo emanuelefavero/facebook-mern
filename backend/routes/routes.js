@@ -24,6 +24,7 @@ router.get(
   '/user/:username/friend-requests',
   userController.getUserFriendRequests
 )
+// router.get('/user/user-by-username/:username', userController.getUserByUsername)
 router.get('/user/username-by-id/:id', userController.getUsernameById)
 router.get('/user/user-by-id/:id', userController.getUserById)
 
