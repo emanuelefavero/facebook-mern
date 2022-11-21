@@ -43,18 +43,8 @@ router.get('/friend-request/:id', friendRequestController.getFriendRequest)
 // Post
 router.post('/posts', postController.createPost)
 router.get('/posts', postController.getPosts)
-// router.get('/posts/:id', postController.getPostById)
-// router.get('/posts/:id', postController.getPost)
-// router.get('/posts/user/:username', postController.getUserPosts)
-// router.put('/posts/:id', postController.updatePost)
-// router.delete('/posts/:id', postController.deletePost)
 
-// // NOTE: TEST get last post
-// router.get('/posts/user/:username/last-post', userController.getLastPost)
-// // NOTE: TEST get friends posts
-// router.get(
-//   '/posts/user/:username/friends-posts',
-//   postController.getFriendsPosts
-// )
+// Post Likes
+router.post('/posts/:postId/like', postController.likePost)
 
 module.exports = router

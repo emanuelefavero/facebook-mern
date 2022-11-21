@@ -133,50 +133,35 @@ exports.getUserPosts = async (req, res) => {
   }
 }
 
-// NOTE: EXPERIMENTAL FEATURES
-// Get all posts from friends
-// exports.getFriendsPosts = async (req, res) => {
-//   try {
-//     // Find the user
-//     const user = await User.findOne({ username: req.params.username })
+// Like Post
+exports.likePost = async (req, res) => {
+  try {
+    // Find the post
+    const post = await Post.findById(req.params.postId)
 
-//     // Find the user friends
-//     const friends = await User.find({ friends: user })
+    // Find the user
+    const user = await User.findOne({ username: req.body.username }).populate(
+      'posts'
+    )
 
-//     // Find the posts from the user friends
-//     const posts = await Post.find({ author: friends })
+    // Check if the user has already liked the post
+    if (post.likes.includes(user._id)) {
+      // Send a message
+      res.status(200).json({ message: 'You already liked this post' })
+    } else {
+      // Add the user to the post likes
+      post.likes.push(user)
 
-//     // Send the posts from the user friends
-//     res.send(posts)
-//   } catch (err) {
-//     res.status(500).send(err)
-//   }
-// }
+      // Increment the number of likes
+      post.numberOfLikes++
 
-// Get all posts from friends using a loop and assigning the posts to an array
-// exports.getFriendsPosts = async (req, res) => {
-//   try {
-//     // Find the user
-//     const user = await User.findOne({ username: req.params.username })
+      // Save the post
+      await post.save()
 
-//     // Find the user friends
-//     const friends = await User.find({ friends: user })
-
-//     // Create an array to store the posts
-//     const posts = []
-
-//     // Loop through the friends
-//     for (let i = 0; i < friends.length; i++) {
-//       // Find the posts from the user friends
-//       const friendPosts = await Post.find({ author: friends[i] })
-
-//       // Add the posts to the posts array
-//       posts.push(...friendPosts)
-//     }
-
-//     // Send the posts from the user friends
-//     res.status(200).json(posts)
-//   } catch (err) {
-//     res.status(500).send(err)
-//   }
-// }
+      // Send the post
+      res.status(200).json(post)
+    }
+  } catch (err) {
+    res.status(500).send(err)
+  }
+}

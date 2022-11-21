@@ -6,5 +6,9 @@ export default interface PostInterface {
   author?: UserInterface | null
   username?: string
   createdAt: Date | string
+
+  likes: UserInterface[] | []
+  numberOfLikes: number
+
   // __v?: number
 }

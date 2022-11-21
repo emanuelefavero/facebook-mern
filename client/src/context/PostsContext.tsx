@@ -84,6 +84,7 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
 
   // GET friends posts
   const getFriendsPosts = async () => {
+    setUserFriendsLastPosts([])
     user?.friends.forEach(async (friendId) => {
       if (friendId === undefined) {
         return

@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useContext } from 'react'
+import axios from 'axios'
 
 // IMPORT COMPONENTS
 import GetUsernameById from './GetUsernameById'
@@ -9,7 +10,7 @@ import UserContext from '../context/UserContext'
 import PostsContext from '../context/PostsContext'
 
 function Posts() {
-  const { getUser } = useContext(UserContext)
+  const { getUser, user } = useContext(UserContext)
   const {
     postContent,
     setPostContent,
@@ -27,6 +28,25 @@ function Posts() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // Like a post
+  const likePost = async (postId: string) => {
+    await axios({
+      method: 'POST',
+      data: {
+        username: user?.username,
+      },
+      // withCredentials: true,
+      url: `/api/posts/${postId}/like`,
+    })
+      .then((res) => {
+        console.log(res.data)
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log(err.response?.data.message)
+      })
+  }
 
   return (
     <>
@@ -59,6 +79,15 @@ function Posts() {
               <GetUsernameById id={post?.author} />
               <p>{post?.content}</p>
               <h6>{post?.createdAt}</h6>
+
+              {/* POST LIKES */}
+              {/* --Check for undefined */}
+              {post?.likes?.length >= 0 ? (
+                <>
+                  <button onClick={() => likePost(post?._id)}>Like</button>
+                  <p>Likes: {post?.likes?.length}</p>
+                </>
+              ) : null}
             </div>
           ))}
       </div>
