@@ -51,6 +51,7 @@ module.exports = function (passport) {
         _id: user._id,
         username: user.username,
         password: user.password,
+        profilePictureUrl: user.profilePictureUrl,
         role: user.role,
         posts: user.posts,
         friends: user.friends,

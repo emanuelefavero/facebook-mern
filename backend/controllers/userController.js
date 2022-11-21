@@ -270,36 +270,26 @@ exports.getUserFriendRequests = (req, res, next) => {
 //     })
 // }
 
-// get lastPost virtual
-exports.getLastPost = (req, res, next) => {
-  User.findOne({ username: req.params.username })
-    .populate('lastPost')
-    .exec((err, foundUser) => {
-      if (err) {
-        return next(err)
-      }
+// edit user profilePictureUrl
+exports.editProfilePictureUrl = (req, res, next) => {
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    User.findByIdAndUpdate(
+      req.params.id,
+      { profilePictureUrl: req.body.profilePictureUrl },
+      { new: true },
+      (err, updatedUser) => {
+        if (err) {
+          return next(err)
+        }
 
-      if (foundUser) {
-        res.status(200).json({ lastPost: foundUser.lastPost })
-      } else {
-        res.status(404).json({ message: 'User not found.' })
+        if (updatedUser) {
+          res.status(200).json({ user: updatedUser })
+        } else {
+          res.status(404).json({ message: 'User not found.' })
+        }
       }
-    })
-}
-
-// get last ten posts
-exports.getLastTenPosts = (req, res, next) => {
-  User.findOne({ username: req.params.username })
-    .populate('lastTenPosts')
-    .exec((err, foundUser) => {
-      if (err) {
-        return next(err)
-      }
-
-      if (foundUser) {
-        res.status(200).json({ lastTenPosts: foundUser.lastTenPosts })
-      } else {
-        res.status(404).json({ message: 'User not found.' })
-      }
-    })
+    )
+  } else {
+    res.status(400).json({ message: 'Invalid ID.' })
+  }
 }

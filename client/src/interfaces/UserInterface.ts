@@ -4,6 +4,7 @@ export default interface UserInterface {
   _id: string
   username: string
   password: string
+  profilePictureUrl?: string
   role: string
   posts: PostInterface[] | []
   friends: string[]

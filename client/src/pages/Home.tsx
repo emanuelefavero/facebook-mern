@@ -8,6 +8,7 @@ import FriendRequestContext from '../context/FriendRequestContext'
 import GetUsernameById from '../components/GetUsernameById'
 import SearchInput from '../components/SearchInput'
 import Posts from '../components/Posts'
+// import ProfilePicture from '../components/ProfilePicture'
 
 function Home() {
   const { user, getUser, userFriends, getUserFriends } = useContext(UserContext)
@@ -28,6 +29,17 @@ function Home() {
 
   return (
     <div>
+      {/* PROFILE PICTURE */}
+      {/* TODO: add - editProfilePictureUrl feature */}
+      {/* TODO: add - profile picture to displayed friends here and in other users detail page */}
+      <img
+        src={user?.profilePictureUrl}
+        alt='Profile'
+        width='150'
+        height='150'
+        style={{ borderRadius: '50%' }}
+      />
+
       {/* GREET USER */}
       <h1>Hello {user?.username}</h1>
 
