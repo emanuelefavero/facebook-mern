@@ -1,4 +1,5 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import axios from 'axios'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
@@ -9,6 +10,9 @@ import GetUsernameById from '../components/GetUsernameById'
 import SearchInput from '../components/SearchInput'
 import Posts from '../components/Posts'
 // import ProfilePicture from '../components/ProfilePicture'
+
+// FIX: remove this after moving profile picture functions to context
+axios.defaults.baseURL = 'http://localhost:4000'
 
 function Home() {
   const { user, getUser, userFriends, getUserFriends } = useContext(UserContext)
@@ -27,18 +31,64 @@ function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Change profile picture by clicking on it and passing the user._id
+  const [editModeProfilePictureUrl, setEditModeProfilePictureUrl] =
+    useState(false)
+  const [profilePictureUrl, setProfilePictureUrl] = useState(
+    user?.profilePictureUrl
+  )
+
+  const changeProfilePicture = async () => {
+    try {
+      await axios.put(
+        `/api/user/profile-picture/${user?._id}`,
+        { profilePictureUrl: profilePictureUrl },
+        { withCredentials: true }
+      )
+      window.location.reload()
+      setEditModeProfilePictureUrl(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div>
-      {/* PROFILE PICTURE */}
-      {/* TODO: add - editProfilePictureUrl feature */}
       {/* TODO: add - profile picture to displayed friends here and in other users detail page */}
-      <img
-        src={user?.profilePictureUrl}
-        alt='Profile'
-        width='150'
-        height='150'
-        style={{ borderRadius: '50%' }}
-      />
+      {/* PROFILE PICTURE */}
+      <div className='profile-picture-container'>
+        <button
+          onClick={() =>
+            setEditModeProfilePictureUrl(!editModeProfilePictureUrl)
+          }
+        >
+          {editModeProfilePictureUrl ? (
+            <span>Cancel</span>
+          ) : (
+            <span>Edit profile picture</span>
+          )}
+        </button>
+
+        {editModeProfilePictureUrl ? (
+          <div>
+            <input
+              type='text'
+              placeholder='Profile picture URL...'
+              value={profilePictureUrl}
+              onChange={(e) => setProfilePictureUrl(e.target.value)}
+            />
+            <button onClick={changeProfilePicture}>Save</button>
+          </div>
+        ) : (
+          <img
+            src={user?.profilePictureUrl}
+            alt='Profile'
+            width='150'
+            height='150'
+            style={{ borderRadius: '50%' }}
+          />
+        )}
+      </div>
 
       {/* GREET USER */}
       <h1>Hello {user?.username}</h1>

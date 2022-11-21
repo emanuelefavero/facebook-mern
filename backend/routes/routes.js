@@ -27,6 +27,8 @@ router.get(
 router.get('/user/username-by-id/:id', userController.getUsernameById)
 router.get('/user/user-by-id/:id', userController.getUserById)
 
+router.put('/user/profile-picture/:id', userController.changeProfilePicture)
+
 // Friend Request
 router.post('/friend-request', friendRequestController.createFriendRequest)
 router.put('/friend-request/:id', friendRequestController.acceptFriendRequest)

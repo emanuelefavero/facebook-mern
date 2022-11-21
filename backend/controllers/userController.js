@@ -271,7 +271,7 @@ exports.getUserFriendRequests = (req, res, next) => {
 // }
 
 // edit user profilePictureUrl
-exports.editProfilePictureUrl = (req, res, next) => {
+exports.changeProfilePicture = (req, res, next) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     User.findByIdAndUpdate(
       req.params.id,
