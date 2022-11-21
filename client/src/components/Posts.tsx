@@ -1,30 +1,37 @@
+import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useContext } from 'react'
-import axios from 'axios'
 
-// IMPORT INTERFACES
-import PostInterface from '../interfaces/PostInterface'
+// IMPORT COMPONENTS
+import GetUsernameById from './GetUsernameById'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
 import PostsContext from '../context/PostsContext'
 
-axios.defaults.baseURL = 'http://localhost:4000'
-
 function Posts() {
   const { getUser } = useContext(UserContext)
-  const { postContent, setPostContent, posts, createPost, getPosts } =
-    useContext(PostsContext)
+  const {
+    postContent,
+    setPostContent,
+    createPost,
+    userPosts,
+    userFriendsLastPosts,
+    getUserPosts,
+    getFriendsPosts,
+  } = useContext(PostsContext)
 
   useEffect(() => {
     getUser()
-    getPosts()
+    getUserPosts()
+    getFriendsPosts()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
-      <h2>Posts</h2>
+      {/* CREATE POST */}
+      <h2>Create Post</h2>
       <input
         type='text'
         placeholder="What's on your mind?"
@@ -33,13 +40,37 @@ function Posts() {
       />
       <button onClick={createPost}>Post</button>
 
-      {posts.map((post: PostInterface) => (
+      {/* LOGGED USER LAST POST */}
+      <h2>Your Last Post</h2>
+      {userPosts.length > 0 ? (
+        <div>
+          <p>{userPosts[userPosts.length - 1].content}</p>
+        </div>
+      ) : (
+        <p>You have no posts yet</p>
+      )}
+
+      {/* FRIENDS POSTS */}
+      <h2>Your Friends Posts</h2>
+      <div>
+        {userFriendsLastPosts!.length > 0 &&
+          userFriendsLastPosts!.map((post: any) => (
+            <div key={post?._id ? post?._id : uuidv4()}>
+              <GetUsernameById id={post?.author} />
+              <p>{post?.content}</p>
+              <h6>{post?.createdAt}</h6>
+            </div>
+          ))}
+      </div>
+
+      {/* DISPLAY ALL POSTS */}
+      {/* {posts.map((post: PostInterface) => (
         <div key={post._id}>
           <h4>{post.author?.username}</h4>
           <p>{post.content}</p>
           <h6>{post.createdAt as string}</h6>
         </div>
-      ))}
+      ))} */}
     </>
   )
 }

@@ -18,6 +18,9 @@ router.get('/search', userController.searchUser)
 
 // User
 router.get('/user', userController.getUser)
+
+// NOTE:
+
 router.get('/user/:username', userController.getUserByUsername)
 router.get('/user/:username/friends', userController.getUserFriends)
 router.get(
@@ -25,6 +28,7 @@ router.get(
   userController.getUserFriendRequests
 )
 router.get('/user/username-by-id/:id', userController.getUsernameById)
+router.get('/user/user-by-id/:id', userController.getUserById)
 
 // Friend Request
 router.post('/friend-request', friendRequestController.createFriendRequest)

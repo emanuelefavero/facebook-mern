@@ -17,12 +17,20 @@ const PostsContext = createContext({
   posts: [] as PostInterface[] | [],
   createPost: () => {},
   getPosts: () => {},
+  userPosts: [] as PostInterface[] | [],
+  userFriendsLastPosts: [] as PostInterface[] | [],
+  getUserPosts: () => {},
+  getFriendsPosts: () => {},
 })
 
 export function PostsProvider({ children }: { children: React.ReactNode }) {
   const { user } = useContext(UserContext)
   const [postContent, setPostContent] = useState('')
   const [posts, setPosts] = useState<PostInterface[] | []>([])
+  const [userPosts, setUserPosts] = useState<PostInterface[] | []>([])
+  const [userFriendsLastPosts, setUserFriendsLastPosts] = useState<
+    PostInterface[] | []
+  >([])
 
   // Create a post
   const createPost = async () => {
@@ -60,6 +68,43 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
       })
   }
 
+  // GET user posts
+  const getUserPosts = async () => {
+    await axios({
+      method: 'GET',
+      url: `/api/user/user-by-id/${user?._id}`,
+    })
+      .then((res) => {
+        setUserPosts(res.data.user.posts)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  // GET friends posts
+  const getFriendsPosts = async () => {
+    user?.friends.forEach(async (friendId) => {
+      if (friendId === undefined) {
+        return
+      } else {
+        await axios({
+          method: 'GET',
+          url: `/api/user/user-by-id/${friendId}`,
+        })
+          .then((res) => {
+            setUserFriendsLastPosts((prev: any) => [
+              ...prev,
+              res.data.user.posts[res.data.user.posts.length - 1],
+            ])
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+    })
+  }
+
   return (
     <PostsContext.Provider
       value={{
@@ -68,6 +113,10 @@ export function PostsProvider({ children }: { children: React.ReactNode }) {
         posts,
         createPost,
         getPosts,
+        userPosts,
+        userFriendsLastPosts,
+        getUserPosts,
+        getFriendsPosts,
       }}
     >
       {children}

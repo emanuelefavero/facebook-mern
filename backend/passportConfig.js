@@ -52,6 +52,9 @@ module.exports = function (passport) {
         username: user.username,
         password: user.password,
         role: user.role,
+        posts: user.posts,
+        friends: user.friends,
+        friendRequests: user.friendRequests,
       }
       cb(err, userInformation)
       // cb(err, user)

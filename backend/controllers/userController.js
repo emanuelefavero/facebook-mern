@@ -1,6 +1,7 @@
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
 const { body, validationResult } = require('express-validator')
+const mongoose = require('mongoose')
 
 const User = require('../models/user')
 
@@ -146,6 +147,27 @@ exports.getUser = (req, res, next) => {
     res.status(200).json({ user: req.user })
   } else {
     res.status(401).json({ message: 'Unauthorized' })
+  }
+}
+
+// get user by id
+exports.getUserById = (req, res, next) => {
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    User.findById(req.params.id)
+      .populate('posts')
+      .exec((err, foundUser) => {
+        if (err) {
+          return next(err)
+        }
+
+        if (foundUser) {
+          res.status(200).json({ user: foundUser })
+        } else {
+          res.status(404).json({ message: 'User not found.' })
+        }
+      })
+  } else {
+    res.status(400).json({ message: 'Invalid ID.' })
   }
 }
 
