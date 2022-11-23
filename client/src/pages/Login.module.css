@@ -42,8 +42,9 @@
   font-weight: 500;
 }
 
-.login input:focus {
-  border: 1px solid rgb(227, 156, 37);
+.login input:focus,
+.login input:active {
+  outline: 1px solid var(--color-primary);
 }
 
 .login button {
