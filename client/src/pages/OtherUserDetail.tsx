@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import UserContext from '../context/UserContext'
 import FriendRequestContext from '../context/FriendRequestContext'
 
-// TODO: Add user profile picture, user posts
+// TODO: Add user posts
 
 function UserDetail() {
   const {
@@ -65,6 +65,16 @@ function UserDetail() {
     <>
       {otherUser?.username ? (
         <>
+          {/* OTHER USER PROFILE PICTURE */}
+          <img
+            src={otherUser?.profilePictureUrl}
+            alt='Profile'
+            width='150'
+            height='150'
+            style={{ borderRadius: '50%' }}
+          />
+
+          {/* OTHER USER USERNAME */}
           <h2>{otherUser.username}</h2>
 
           {/* ADD FRIEND */}
