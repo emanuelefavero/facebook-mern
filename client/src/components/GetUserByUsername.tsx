@@ -1,12 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+
+// IMPORT CONTEXT
+import UserContext from '../context/UserContext'
 
 interface Props {
   username: string
 }
 
 function GetUserByUsername({ username }: Props) {
+  const { user } = useContext(UserContext)
+
   const [displayUsername, setDisplayUsername] = useState('')
   const [displayProfilePictureUrl, setDisplayProfilePictureUrl] = useState('')
 
@@ -43,7 +48,12 @@ function GetUserByUsername({ username }: Props) {
   return (
     <>
       {/* PROFILE PICTURE */}
-      <Link to={`/user/${displayUsername}`}>
+      <Link
+        to={
+          // IF THE SEARCH RESULT IS THE CURRENT USER, GO TO THE HOME PAGE
+          displayUsername === user?.username ? '/' : `/user/${displayUsername}`
+        }
+      >
         <img
           src={displayProfilePictureUrl}
           alt='Profile'

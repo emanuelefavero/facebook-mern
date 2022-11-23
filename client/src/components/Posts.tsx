@@ -101,8 +101,6 @@ function Posts() {
                   <p>Comments: {post?.comments?.length}</p>
                   {post?.comments?.map((comment: any) => (
                     <div key={comment?._id ? comment?._id : uuidv4()}>
-                      {/* TODO: Check if comment?.username is equal to user.username. If so, don't show username link, just the text OR show a link to the home (check how I implemented this on SearchResults.tsx) */}
-
                       {/* --Username and profilePicture Link */}
                       <GetUserByUsername username={comment?.username} />
                       <p>{comment?.content}</p>
