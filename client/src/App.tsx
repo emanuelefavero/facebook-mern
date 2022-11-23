@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 // Import Components
 import ProtectedRoute from './components/ProtectedRoute'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 // Import Pages
 import Home from './pages/Home'
@@ -69,6 +70,7 @@ function App() {
                     />
                   </Routes>
                 </main>
+                <Footer />
               </SearchProvider>
             </PostsProvider>
           </FriendRequestProvider>

@@ -14,28 +14,20 @@ function Header() {
   return (
     <>
       <header>
-        <div>
-          <span>
-            <Link to='/'>Facebook</Link>
-          </span>
-
-          {user?.username ? (
-            <>
-              <button
-                onClick={() => {
-                  logout()
-                }}
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <nav>
-              <Link to='/login'>Login</Link>
-              <Link to='/register'>Register</Link>
-            </nav>
-          )}
-        </div>
+        {user?.username ? (
+          <>
+            <span>
+              <Link to='/'>Facebook</Link>
+            </span>
+            <button
+              onClick={() => {
+                logout()
+              }}
+            >
+              Logout
+            </button>
+          </>
+        ) : null}
       </header>
     </>
   )

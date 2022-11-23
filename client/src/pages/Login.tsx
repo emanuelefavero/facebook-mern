@@ -1,5 +1,5 @@
-import { useNavigate, Navigate } from 'react-router-dom'
 import { useContext, useEffect } from 'react'
+import { useNavigate, Navigate, Link } from 'react-router-dom'
 import UserContext from '../context/UserContext'
 
 function Login() {
@@ -27,7 +27,7 @@ function Login() {
     return (
       <>
         <div>
-          <h1>Login</h1>
+          <h1>Facebook</h1>
           <input
             type='text'
             placeholder='Username'
@@ -48,6 +48,12 @@ function Login() {
           >
             Login
           </button>
+          <div>
+            <br />
+            or
+            <br />
+          </div>
+          <Link to='/register'>Create new account</Link>
         </div>
       </>
     )

@@ -1,5 +1,5 @@
-import { useNavigate, Navigate } from 'react-router-dom'
 import { useContext, useEffect } from 'react'
+import { useNavigate, Navigate, Link } from 'react-router-dom'
 import UserContext from '../context/UserContext'
 
 function Register() {
@@ -26,14 +26,20 @@ function Register() {
   } else {
     return (
       <div>
-        <h1>Register</h1>
+        <header>Join Facebook</header>
+        <h1>Choose a username: </h1>
+        <p>Enter a unique username to use on our site.</p>
+        <label htmlFor='username'>Username</label>
         <input
+          name='username'
           type='text'
           placeholder='Username'
           onChange={(e) => setRegisterUsername(e.target.value)}
           value={registerUsername}
         />
+        <label htmlFor='username'>Password</label>
         <input
+          name='password'
           type='text'
           placeholder='Password'
           onChange={(e) => setRegisterPassword(e.target.value)}
@@ -47,6 +53,12 @@ function Register() {
         >
           Register
         </button>
+        <div>
+          <br />
+          or
+          <br />
+        </div>
+        <Link to='/login'>Login</Link>
       </div>
     )
   }
