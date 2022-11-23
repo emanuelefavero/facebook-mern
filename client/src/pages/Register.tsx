@@ -21,7 +21,7 @@ function Register() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (user?.username) {
+  if (user?.username && window.location.pathname === '/register') {
     return <Navigate to='/' replace />
   } else {
     return (

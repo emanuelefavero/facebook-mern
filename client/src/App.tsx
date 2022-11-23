@@ -65,11 +65,7 @@ function App() {
                     {/* OTHER USER DETAIL */}
                     <Route
                       path='/user/:username'
-                      element={
-                        <ProtectedRoute redirectPath='/login'>
-                          <OtherUserDetail />
-                        </ProtectedRoute>
-                      }
+                      element={<OtherUserDetail />}
                     />
                   </Routes>
                 </main>

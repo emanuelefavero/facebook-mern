@@ -30,7 +30,7 @@ function GetUserLinkByUsername({ username }: Props) {
       })
         .then((res) => {
           if (res.data.user) {
-            setDisplayUsername(res.data.user.username)
+            setDisplayUsername(username)
             setDisplayProfilePictureUrl(res.data.user.profilePictureUrl)
           } else {
             setDisplayUsername('')

@@ -21,7 +21,7 @@ function Login() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (user?.username) {
+  if (user?.username && window.location.pathname === '/login') {
     return <Navigate to='/' replace />
   } else {
     return (

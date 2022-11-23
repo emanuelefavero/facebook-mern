@@ -24,7 +24,7 @@ router.get(
   '/user/:username/friend-requests',
   userController.getUserFriendRequests
 )
-// router.get('/user/user-by-username/:username', userController.getUserByUsername)
+
 router.get('/user/username-by-id/:id', userController.getUsernameById)
 router.get('/user/user-by-id/:id', userController.getUserById)
 
@@ -44,6 +44,7 @@ router.get('/friend-request/:id', friendRequestController.getFriendRequest)
 router.post('/posts', postController.createPost)
 router.get('/posts', postController.getPosts)
 router.get('/posts/:id', postController.getPostById)
+router.get('/posts/user/:username', postController.getUserPosts)
 
 // Post Likes
 router.post('/posts/:postId/like', postController.likePost)

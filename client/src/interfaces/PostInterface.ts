@@ -1,4 +1,5 @@
 import UserInterface from './UserInterface'
+import CommentInterface from './CommentInterface'
 
 export default interface PostInterface {
   _id?: string
@@ -9,6 +10,8 @@ export default interface PostInterface {
 
   likes: UserInterface[] | []
   numberOfLikes: number
+
+  comments: CommentInterface[] | []
 
   // __v?: number
 }
