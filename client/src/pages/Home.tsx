@@ -5,11 +5,12 @@ import UserContext from '../context/UserContext'
 import FriendRequestContext from '../context/FriendRequestContext'
 
 // IMPORT COMPONENTS
-import GetFriendUsernameById from '../components/GetFriendUsernameById'
+// import GetFriendUsernameById from '../components/GetFriendUsernameById'
 import GetUserById from '../components/GetUserById'
 import SearchInput from '../components/SearchInput'
 import Posts from '../components/Posts'
 import ProfilePicture from '../components/ProfilePicture'
+import Friends from '../components/Friends'
 
 function Home() {
   const { user, getUser, userFriends, getUserFriends } = useContext(UserContext)
@@ -40,8 +41,8 @@ function Home() {
       <SearchInput />
 
       {/* FRIENDS */}
-      {/* <Friends userFriends={userFriends} /> */}
-      <h2>Friends</h2>
+      <Friends userFriends={userFriends} />
+      {/* <h2>Friends</h2>
 
       {userFriends.length > 0 && (
         <h3>
@@ -61,7 +62,7 @@ function Home() {
         ))
       ) : (
         <p>You have no friends</p>
-      )}
+      )} */}
 
       {/* FRIEND REQUESTS */}
       {/* <FriendRequests friendRequests={friendRequests} user={user} /> */}
