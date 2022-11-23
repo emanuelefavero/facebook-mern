@@ -4,7 +4,7 @@ import React from 'react'
 import UserInterface from '../interfaces/UserInterface'
 
 // IMPORT COMPONENTS
-import GetFriendUsernameById from '../components/GetFriendUsernameById'
+import GetFriendUsernameById from './GetFriendUsernameById'
 
 interface Props {
   userFriends: UserInterface[] | []
