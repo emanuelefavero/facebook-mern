@@ -5,7 +5,7 @@ import FriendRequestInterface from '../interfaces/FriendRequestInterface'
 import UserInterface from '../interfaces/UserInterface'
 
 // IMPORT COMPONENTS
-import GetUserById from './GetUserById'
+import GetUserLinkById from './GetUserLinkById'
 
 // IMPORT CONTEXT
 import FriendRequestContext from '../context/FriendRequestContext'
@@ -30,7 +30,7 @@ function FriendRequests({ friendRequests, user }: Props) {
             <li key={friendRequest._id}>
               <>
                 <div>
-                  <GetUserById id={friendRequest.from as string} />
+                  <GetUserLinkById id={friendRequest.from as string} />
                   wants to be friends with you
                 </div>
 

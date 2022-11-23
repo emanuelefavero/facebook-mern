@@ -1,32 +1,27 @@
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { baseURL } from '../axiosConfig'
 
-// IMPORT CONTEXT
-import UserContext from '../context/UserContext'
-
 axios.defaults.baseURL = baseURL
 
 interface Props {
-  username: string
+  id: string
 }
 
-function GetUserByUsername({ username }: Props) {
-  const { user } = useContext(UserContext)
-
+function GetUserLinkById({ id }: Props) {
   const [displayUsername, setDisplayUsername] = useState('')
   const [displayProfilePictureUrl, setDisplayProfilePictureUrl] = useState('')
 
-  // GET user by username as string
-  const getUserByUsername = async (username: string) => {
-    if (username === undefined) {
+  // GET user by id as string
+  const getUserById = async (id: string) => {
+    if (id === undefined) {
       return
     } else {
       await axios({
         method: 'GET',
         withCredentials: true,
-        url: `/api/user/${username}`,
+        url: `/api/user/user-by-id/${id}`,
       })
         .then((res) => {
           if (res.data.user) {
@@ -44,24 +39,19 @@ function GetUserByUsername({ username }: Props) {
   }
 
   useEffect(() => {
-    getUserByUsername(username)
+    getUserById(id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
       {/* PROFILE PICTURE */}
-      <Link
-        to={
-          // IF THE SEARCH RESULT IS THE CURRENT USER, GO TO THE HOME PAGE
-          displayUsername === user?.username ? '/' : `/user/${displayUsername}`
-        }
-      >
+      <Link to={`/user/${displayUsername}`}>
         <img
           src={displayProfilePictureUrl}
           alt='Profile'
-          width='25'
-          height='25'
+          width='50'
+          height='50'
           style={{ borderRadius: '50%' }}
         />
 
@@ -72,4 +62,4 @@ function GetUserByUsername({ username }: Props) {
   )
 }
 
-export default GetUserByUsername
+export default GetUserLinkById

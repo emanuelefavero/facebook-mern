@@ -10,7 +10,7 @@ interface Props {
   friendProfilePictureUrl: string
 }
 
-function GetFriendUsernameById({ id, friendProfilePictureUrl }: Props) {
+function GetFriendLinkById({ id, friendProfilePictureUrl }: Props) {
   const [displayUsername, setDisplayUsername] = useState('')
 
   // GET username by id as string
@@ -61,4 +61,4 @@ function GetFriendUsernameById({ id, friendProfilePictureUrl }: Props) {
   )
 }
 
-export default GetFriendUsernameById
+export default GetFriendLinkById

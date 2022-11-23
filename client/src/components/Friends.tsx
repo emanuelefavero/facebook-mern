@@ -4,7 +4,7 @@ import React from 'react'
 import UserInterface from '../interfaces/UserInterface'
 
 // IMPORT COMPONENTS
-import GetFriendUsernameById from './GetFriendUsernameById'
+import GetFriendLinkById from './GetFriendLinkById'
 
 interface Props {
   userFriends: UserInterface[] | []
@@ -25,7 +25,7 @@ function Friends({ userFriends }: Props) {
       {userFriends.length > 0 ? (
         userFriends.map((friend) => (
           <div key={friend._id}>
-            <GetFriendUsernameById
+            <GetFriendLinkById
               id={friend._id}
               friendProfilePictureUrl={friend?.profilePictureUrl as string}
             />

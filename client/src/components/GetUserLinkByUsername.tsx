@@ -1,27 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { baseURL } from '../axiosConfig'
 
+// IMPORT CONTEXT
+import UserContext from '../context/UserContext'
+
 axios.defaults.baseURL = baseURL
 
 interface Props {
-  id: string
+  username: string
 }
 
-function GetUserById({ id }: Props) {
+function GetUserLinkByUsername({ username }: Props) {
+  const { user } = useContext(UserContext)
+
   const [displayUsername, setDisplayUsername] = useState('')
   const [displayProfilePictureUrl, setDisplayProfilePictureUrl] = useState('')
 
-  // GET user by id as string
-  const getUserById = async (id: string) => {
-    if (id === undefined) {
+  // GET user by username as string
+  const getUserByUsername = async (username: string) => {
+    if (username === undefined) {
       return
     } else {
       await axios({
         method: 'GET',
         withCredentials: true,
-        url: `/api/user/user-by-id/${id}`,
+        url: `/api/user/${username}`,
       })
         .then((res) => {
           if (res.data.user) {
@@ -39,19 +44,24 @@ function GetUserById({ id }: Props) {
   }
 
   useEffect(() => {
-    getUserById(id)
+    getUserByUsername(username)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
       {/* PROFILE PICTURE */}
-      <Link to={`/user/${displayUsername}`}>
+      <Link
+        to={
+          // IF THE SEARCH RESULT IS THE CURRENT USER, GO TO THE HOME PAGE
+          displayUsername === user?.username ? '/' : `/user/${displayUsername}`
+        }
+      >
         <img
           src={displayProfilePictureUrl}
           alt='Profile'
-          width='50'
-          height='50'
+          width='25'
+          height='25'
           style={{ borderRadius: '50%' }}
         />
 
@@ -62,4 +72,4 @@ function GetUserById({ id }: Props) {
   )
 }
 
-export default GetUserById
+export default GetUserLinkByUsername

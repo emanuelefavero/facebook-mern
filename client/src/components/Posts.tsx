@@ -2,8 +2,8 @@ import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useContext } from 'react'
 
 // IMPORT COMPONENTS
-import GetUserByUsername from './GetUserByUsername'
-import GetUserById from './GetUserById'
+import GetUserLinkByUsername from './GetUserLinkByUsername'
+import GetUserLinkById from './GetUserLinkById'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
@@ -65,7 +65,7 @@ function Posts() {
               {post?.content && (
                 <>
                   {/* --Username and profilePicture Link */}
-                  <GetUserById id={post?.author} />
+                  <GetUserLinkById id={post?.author} />
                   <p>{post?.content}</p>
                   <h6>{post?.createdAt}</h6>
                 </>
@@ -102,7 +102,7 @@ function Posts() {
                   {post?.comments?.map((comment: any) => (
                     <div key={comment?._id ? comment?._id : uuidv4()}>
                       {/* --Username and profilePicture Link */}
-                      <GetUserByUsername username={comment?.username} />
+                      <GetUserLinkByUsername username={comment?.username} />
                       <p>{comment?.content}</p>
                       <h6>{comment?.createdAt}</h6>
                     </div>
