@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
-import axios from 'axios'
+import { useContext, useEffect } from 'react'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
@@ -10,9 +9,7 @@ import GetFriendUsernameById from '../components/GetFriendUsernameById'
 import GetUserById from '../components/GetUserById'
 import SearchInput from '../components/SearchInput'
 import Posts from '../components/Posts'
-
-// FIX: remove this after moving profile picture functions to context
-axios.defaults.baseURL = 'http://localhost:4000'
+import ProfilePicture from '../components/ProfilePicture'
 
 function Home() {
   const { user, getUser, userFriends, getUserFriends } = useContext(UserContext)
@@ -31,63 +28,10 @@ function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Change profile picture by clicking on it and passing the user._id
-  const [editModeProfilePictureUrl, setEditModeProfilePictureUrl] =
-    useState(false)
-  const [profilePictureUrl, setProfilePictureUrl] = useState(
-    user?.profilePictureUrl
-  )
-
-  const changeProfilePicture = async () => {
-    try {
-      await axios.put(
-        `/api/user/profile-picture/${user?._id}`,
-        { profilePictureUrl: profilePictureUrl },
-        { withCredentials: true }
-      )
-      window.location.reload()
-      setEditModeProfilePictureUrl(false)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   return (
     <div>
       {/* PROFILE PICTURE */}
-      <div className='profile-picture-container'>
-        <button
-          onClick={() =>
-            setEditModeProfilePictureUrl(!editModeProfilePictureUrl)
-          }
-        >
-          {editModeProfilePictureUrl ? (
-            <span>Cancel</span>
-          ) : (
-            <span>Edit profile picture</span>
-          )}
-        </button>
-
-        {editModeProfilePictureUrl ? (
-          <div>
-            <input
-              type='text'
-              placeholder='Profile picture URL...'
-              value={profilePictureUrl}
-              onChange={(e) => setProfilePictureUrl(e.target.value)}
-            />
-            <button onClick={changeProfilePicture}>Save</button>
-          </div>
-        ) : (
-          <img
-            src={user?.profilePictureUrl}
-            alt='Profile'
-            width='150'
-            height='150'
-            style={{ borderRadius: '50%' }}
-          />
-        )}
-      </div>
+      <ProfilePicture user={user} />
 
       {/* GREET USER */}
       <h1>Hello {user?.username}</h1>
