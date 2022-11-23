@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { baseURL } from '../axiosConfig'
 
 // IMPORT INTERFACE
 import UserInterface from '../interfaces/UserInterface'
 
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = baseURL
 
 interface Props {
   user: UserInterface | null

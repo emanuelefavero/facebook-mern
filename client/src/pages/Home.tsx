@@ -40,6 +40,7 @@ function Home() {
       <SearchInput />
 
       {/* FRIENDS */}
+      {/* <Friends userFriends={userFriends} /> */}
       <h2>Friends</h2>
 
       {userFriends.length > 0 && (
@@ -63,6 +64,7 @@ function Home() {
       )}
 
       {/* FRIEND REQUESTS */}
+      {/* <FriendRequests friendRequests={friendRequests} user={user} /> */}
       <h2>Friend Requests</h2>
       <ul>
         {friendRequests.map((friendRequest) => {

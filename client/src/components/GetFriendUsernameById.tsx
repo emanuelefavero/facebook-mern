@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { baseURL } from '../axiosConfig'
+
+axios.defaults.baseURL = baseURL
 
 interface Props {
   id: string
@@ -11,7 +14,7 @@ function GetFriendUsernameById({ id, friendProfilePictureUrl }: Props) {
   const [displayUsername, setDisplayUsername] = useState('')
 
   // GET username by id as string
-  const GetFriendUsernameById = async (id: string) => {
+  const getFriendUsernameById = async (id: string) => {
     if (id === undefined) {
       return
     } else {
@@ -34,7 +37,7 @@ function GetFriendUsernameById({ id, friendProfilePictureUrl }: Props) {
   }
 
   useEffect(() => {
-    GetFriendUsernameById(id)
+    getFriendUsernameById(id)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

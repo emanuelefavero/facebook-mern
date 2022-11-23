@@ -1,6 +1,7 @@
 import { useState, useContext, createContext } from 'react'
 import axios from 'axios'
 import type { AxiosError } from 'axios'
+import { baseURL } from '../axiosConfig'
 
 // IMPORT INTERFACES
 import PostInterface from '../interfaces/PostInterface'
@@ -8,7 +9,7 @@ import PostInterface from '../interfaces/PostInterface'
 // IMPORT CONTEXT
 import UserContext from './UserContext'
 
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = baseURL
 
 // CONTEXT
 const PostsContext = createContext({

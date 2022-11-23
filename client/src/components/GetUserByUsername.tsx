@@ -1,9 +1,12 @@
 import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { baseURL } from '../axiosConfig'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
+
+axios.defaults.baseURL = baseURL
 
 interface Props {
   username: string

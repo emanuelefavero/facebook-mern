@@ -1,12 +1,13 @@
 import React, { useState, createContext } from 'react'
 import axios from 'axios'
 import type { AxiosError } from 'axios'
+import { baseURL } from '../axiosConfig'
 
 // IMPORT INTERFACES
 import UserInterface from '../interfaces/UserInterface'
 import FriendRequestInterface from '../interfaces/FriendRequestInterface'
 
-axios.defaults.baseURL = 'http://localhost:4000'
+axios.defaults.baseURL = baseURL
 
 // CONTEXT
 const UserContext = createContext({
