@@ -1,0 +1,104 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100vw;
+  padding: 0.6rem 1rem;
+}
+
+.login .logo {
+  color: var(--color-primary);
+
+  font-family: 'Klavika', sans-serif;
+  text-transform: lowercase;
+  font-size: 1.5rem;
+  text-align: center;
+
+  padding-top: 0.4rem;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
+  padding-bottom: 0.2rem;
+}
+
+.login input {
+  color: #000;
+  background-color: rgb(245, 246, 247);
+
+  font-size: 0.875rem;
+
+  width: 100%;
+  max-width: 420px;
+  padding: 0.8rem 0.6rem;
+  margin-top: 0.4rem;
+
+  border-radius: var(--border-radius-input);
+  border: 1px solid rgb(238, 238, 238);
+  border-bottom: 2px solid rgb(228, 228, 228);
+}
+
+.login input::placeholder {
+  color: rgb(117, 117, 117);
+  font-weight: 500;
+}
+
+.login input:focus {
+  border: 1px solid rgb(227, 156, 37);
+}
+
+.login button {
+  color: #fff;
+  background-color: var(--color-primary);
+
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+
+  width: 100%;
+  max-width: 420px;
+  padding: 0.6rem 0.6rem;
+  margin-top: 0.65rem;
+
+  border-radius: var(--border-radius-button);
+  border: 0;
+  cursor: pointer;
+}
+
+.login .orSection {
+  display: flex;
+
+  width: 100%;
+  max-width: 420px;
+  margin-top: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.login .orSection hr {
+  display: inline-block;
+
+  height: 1px;
+  width: 100%;
+
+  opacity: 0.45;
+}
+
+.login .orSection .or {
+  color: rgb(75, 79, 86);
+
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  position: relative;
+  top: -9px;
+
+  margin: 0 0.7rem;
+}
+
+.login .registerButton {
+  background-color: var(--color-success);
+  border-radius: var(--border-radius-button);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.875rem;
+  padding: 0.6rem 1.05rem;
+}
