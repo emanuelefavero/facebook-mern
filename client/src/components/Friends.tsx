@@ -1,4 +1,4 @@
-import React from 'react'
+import styles from './Friends.module.css'
 
 // IMPORT INTERFACES
 import UserInterface from '../interfaces/UserInterface'
@@ -12,29 +12,26 @@ interface Props {
 
 function Friends({ userFriends }: Props) {
   return (
-    <>
-      <h2>Friends</h2>
-
-      {userFriends.length > 0 && (
-        <h3>
-          You have {userFriends.length.toString()} friend
+    <div className={styles.friends}>
+      {userFriends.length > 0 ? (
+        <h2>
+          {userFriends.length.toString()} Friend
           {userFriends.length > 1 && 's'}
-        </h3>
+        </h2>
+      ) : (
+        <h2>No Friends</h2>
       )}
 
-      {userFriends.length > 0 ? (
+      {userFriends.length > 0 &&
         userFriends.map((friend) => (
-          <div key={friend._id}>
+          <div className={styles.friend} key={friend._id}>
             <GetFriendLinkById
               id={friend._id}
               friendProfilePictureUrl={friend?.profilePictureUrl as string}
             />
           </div>
-        ))
-      ) : (
-        <p>You have no friends</p>
-      )}
-    </>
+        ))}
+    </div>
   )
 }
 

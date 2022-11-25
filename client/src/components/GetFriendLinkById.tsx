@@ -1,4 +1,8 @@
-import styles from './GetFriendLinkById.module.css'
+// NOTE: style found in ../pages/SearchResults.module.css
+import searchResultsStyles from '../pages/SearchResults.module.css'
+// style found in ./Friends.module.css
+import friendsStyle from './Friends.module.css'
+
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -46,7 +50,11 @@ function GetFriendLinkById({ id, friendProfilePictureUrl }: Props) {
   return (
     <>
       {/* PROFILE PICTURE */}
-      <Link className={styles.link} to={`/user/${displayUsername}`}>
+      <Link
+        // NOTE: style found in ../pages/SearchResults.module.css
+        className={`${searchResultsStyles.link} ${friendsStyle.link}`}
+        to={`/user/${displayUsername}`}
+      >
         <img
           src={friendProfilePictureUrl}
           alt='Profile'
@@ -55,7 +63,9 @@ function GetFriendLinkById({ id, friendProfilePictureUrl }: Props) {
           style={{ borderRadius: '50%' }}
         />
 
-        <span className={styles.usernameText}>
+        <span
+          className={`${searchResultsStyles.usernameText} ${friendsStyle.usernameText}`}
+        >
           {/* USERNAME */}
           {displayUsername}
         </span>
