@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
@@ -23,25 +23,62 @@ function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const [showPosts, setShowPosts] = useState(true)
+  const [showFriends, setShowFriends] = useState(false)
+
   return (
     <div>
+      {/* SEARCH */}
+      <SearchInput />
+
       {/* PROFILE PICTURE */}
       <ProfilePicture user={user} />
 
       {/* GREET USER */}
       <h1>Hello {user?.username}</h1>
 
-      {/* SEARCH */}
-      <SearchInput />
+      {/* SHOW POSTS BUTTON */}
+      <button
+        onClick={() => {
+          setShowPosts(true)
+          setShowFriends(false)
+        }}
+        style={{
+          borderBottom: showPosts ? '2px solid blue' : 'none',
+        }}
+      >
+        Show Posts
+      </button>
 
-      {/* FRIENDS */}
-      <Friends userFriends={userFriends} />
+      {/* SHOW FRIENDS BUTTON */}
+      <button
+        onClick={() => {
+          setShowFriends(true)
+          setShowPosts(false)
+        }}
+        style={{
+          borderBottom: showFriends ? '2px solid blue' : 'none',
+        }}
+      >
+        Show Friends
+      </button>
 
-      {/* FRIEND REQUESTS */}
-      <FriendRequests friendRequests={friendRequests} user={user} />
+      {showFriends && (
+        <>
+          {/* FRIEND REQUESTS */}
+          <FriendRequests friendRequests={friendRequests} user={user} />
 
-      {/* POSTS */}
-      <Posts />
+          {/* FRIENDS */}
+          <Friends userFriends={userFriends} />
+        </>
+      )}
+
+      {showPosts && (
+        <>
+          {/* POSTS */}
+          <Posts />
+        </>
+      )}
     </div>
   )
 }
