@@ -10,6 +10,10 @@
   --color-header-text: #fff;
   --color-header-background: rgb(59, 89, 152);
 
+  --color-search-input-background: rgb(233, 235, 238);
+  --color-search-input-placeholder: var(--color-footer-text);
+  --color-search-icon: rgb(71, 76, 82);
+
   --border-radius-primary: 0.25rem;
   --border-radius-button: var(--border-radius-primary);
   --border-radius-input: var(--border-radius-primary);
