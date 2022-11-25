@@ -1,3 +1,4 @@
+import styles from './Home.module.css'
 import { useContext, useEffect, useState } from 'react'
 
 // IMPORT CONTEXT
@@ -27,7 +28,7 @@ function Home() {
   const [showFriends, setShowFriends] = useState(false)
 
   return (
-    <div>
+    <div className={styles.home}>
       {/* SEARCH */}
       <SearchInput />
 
@@ -35,7 +36,7 @@ function Home() {
       <ProfilePicture user={user} />
 
       {/* GREET USER */}
-      <h1>Hello {user?.username}</h1>
+      <h2>{user?.username}</h2>
 
       {/* SHOW POSTS BUTTON */}
       <button
