@@ -1,3 +1,4 @@
+import friendRequestsStyles from './FriendRequests.module.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -46,7 +47,10 @@ function GetUserLinkById({ id }: Props) {
   return (
     <>
       {/* PROFILE PICTURE */}
-      <Link to={`/user/${displayUsername}`}>
+      <Link
+        className={friendRequestsStyles.link}
+        to={`/user/${displayUsername}`}
+      >
         <img
           src={displayProfilePictureUrl}
           alt='Profile'
@@ -56,7 +60,9 @@ function GetUserLinkById({ id }: Props) {
         />
 
         {/* USERNAME */}
-        {displayUsername}
+        <span className={friendRequestsStyles.usernameText}>
+          {displayUsername}
+        </span>
       </Link>
     </>
   )

@@ -1,0 +1,74 @@
+.friendRequests {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 0.45rem 1rem;
+}
+
+.friendRequests h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.friendRequests .noRequests {
+  font-size: 1rem;
+  color: rgb(190, 195, 201);
+  font-weight: 500;
+  margin-bottom: 0.9rem;
+  display: flex;
+  justify-content: center;
+}
+
+.friendRequests li.friendRequest {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.friendRequests .link {
+  display: flex;
+  align-items: center;
+}
+
+.friendRequests .link .usernameText {
+  font-weight: 700;
+  margin-left: 1rem;
+  color: var(--color-search-results-text);
+}
+
+.friendRequests .buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-left: 0.5rem;
+}
+
+.friendRequests .buttons button {
+  width: 100%;
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--color-primary);
+  color: var(--white);
+  border: 0;
+  border-radius: var(--border-radius-primary);
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+}
+
+.friendRequests .buttons button.decline {
+  background-color: rgb(240, 242, 245);
+  color: rgb(50, 52, 54);
+}
+
+.friendRequests hr {
+  width: 100%;
+  margin-top: 0.5rem;
+  border: 1px solid var(--color-home-divider);
+}

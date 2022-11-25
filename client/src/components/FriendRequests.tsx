@@ -1,3 +1,4 @@
+import styles from './FriendRequests.module.css'
 import { useContext, useRef, useEffect, useState } from 'react'
 
 // IMPORT INTERFACES
@@ -34,41 +35,48 @@ function FriendRequests({ friendRequests, user }: Props) {
   }, [])
 
   return (
-    <>
+    <div className={styles.friendRequests}>
       <h2>Friend Requests</h2>
-      {userHasFriendsRequests ? null : <div>No requests</div>}
+      {userHasFriendsRequests ? null : (
+        <div className={styles.noRequests}>No requests</div>
+      )}
       <ul ref={ulRef}>
         {friendRequests.map((friendRequest) => {
           // Check if friend request is not from user and its to user
           return friendRequest.from !== user?._id &&
             friendRequest.to === user?._id ? (
-            <li key={friendRequest._id}>
+            <li className={styles.friendRequest} key={friendRequest._id}>
               <>
                 <div>
                   <GetUserLinkById id={friendRequest.from as string} />
-                  wants to be friends with you
                 </div>
 
-                <button
-                  onClick={() => {
-                    acceptFriendRequest(friendRequest._id as string)
-                  }}
-                >
-                  Accept
-                </button>
-                <button
-                  onClick={() => {
-                    declineFriendRequest(friendRequest._id as string)
-                  }}
-                >
-                  Decline
-                </button>
+                <div className={styles.buttons}>
+                  <button
+                    className={styles.accept}
+                    onClick={() => {
+                      acceptFriendRequest(friendRequest._id as string)
+                    }}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    className={styles.decline}
+                    onClick={() => {
+                      declineFriendRequest(friendRequest._id as string)
+                    }}
+                  >
+                    Decline
+                  </button>
+                </div>
               </>
             </li>
           ) : null
         })}
       </ul>
-    </>
+
+      <hr />
+    </div>
   )
 }
 
