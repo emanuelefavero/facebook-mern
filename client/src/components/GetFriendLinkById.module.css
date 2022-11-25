@@ -1,0 +1,9 @@
+.link {
+  display: flex;
+  align-items: center;
+}
+
+.link .usernameText {
+  margin-left: 1rem;
+  color: var(--color-search-results-text);
+}

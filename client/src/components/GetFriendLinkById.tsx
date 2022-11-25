@@ -1,3 +1,4 @@
+import styles from './GetFriendLinkById.module.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -45,7 +46,7 @@ function GetFriendLinkById({ id, friendProfilePictureUrl }: Props) {
   return (
     <>
       {/* PROFILE PICTURE */}
-      <Link to={`/user/${displayUsername}`}>
+      <Link className={styles.link} to={`/user/${displayUsername}`}>
         <img
           src={friendProfilePictureUrl}
           alt='Profile'
@@ -54,8 +55,10 @@ function GetFriendLinkById({ id, friendProfilePictureUrl }: Props) {
           style={{ borderRadius: '50%' }}
         />
 
-        {/* USERNAME */}
-        {displayUsername}
+        <span className={styles.usernameText}>
+          {/* USERNAME */}
+          {displayUsername}
+        </span>
       </Link>
     </>
   )

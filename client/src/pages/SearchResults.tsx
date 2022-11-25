@@ -1,5 +1,9 @@
+import styles from './SearchResults.module.css'
 import { useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
+
+// IMPORT COMPONENTS
+import GetFriendLinkById from '../components/GetFriendLinkById'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
@@ -17,23 +21,32 @@ function SearchResults() {
   }, [])
 
   return (
-    <>
-      <h1>Search Results</h1>
-      {searchResults.map((searchResult) => (
-        <div key={searchResult._id}>
-          <Link
-            to={
-              // IF THE SEARCH RESULT IS THE CURRENT USER, GO TO THE HOME PAGE
-              searchResult.username === user?.username
-                ? '/'
-                : `/user/${searchResult.username}`
-            }
-          >
-            {searchResult.username}
-          </Link>
-        </div>
-      ))}
-    </>
+    <div className={styles.searchResults}>
+      <div className={styles.title}>
+        <h3>Search Results</h3>
+      </div>
+      <ul className={styles.results}>
+        {searchResults.map((searchResult) => (
+          <li key={searchResult._id}>
+            <Link
+              to={
+                // IF THE SEARCH RESULT IS THE CURRENT USER, GO TO THE HOME PAGE
+                searchResult.username === user?.username
+                  ? '/'
+                  : `/user/${searchResult.username}`
+              }
+            >
+              <GetFriendLinkById
+                id={searchResult._id}
+                friendProfilePictureUrl={
+                  searchResult?.profilePictureUrl as string
+                }
+              />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
