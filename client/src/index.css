@@ -34,6 +34,9 @@
 
   --color-home-divider: rgb(238, 238, 238);
 
+  --color-posts-input-border: rgb(225, 227, 230);
+  --color-posts-input-placeholder: var(--color-search-icon);
+
   --border-radius-primary: 0.25rem;
   --border-radius-button: var(--border-radius-primary);
   --border-radius-input: var(--border-radius-primary);

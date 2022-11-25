@@ -1,3 +1,4 @@
+import styles from './Posts.module.css'
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useContext } from 'react'
 
@@ -34,16 +35,19 @@ function Posts() {
   }, [])
 
   return (
-    <>
+    <div className={styles.posts}>
       {/* CREATE POST */}
-      <h2>Create Post</h2>
-      <input
-        type='text'
-        placeholder="What's on your mind?"
-        value={postContent}
-        onChange={(e) => setPostContent(e.target.value)}
-      />
-      <button onClick={createPost}>Post</button>
+      <div className={styles.createPost}>
+        <input
+          type='text'
+          placeholder="What's on your mind?"
+          value={postContent}
+          onChange={(e) => setPostContent(e.target.value)}
+        />
+        <button onClick={createPost}>Post</button>
+      </div>
+
+      <hr className={styles.divider} />
 
       {/* LOGGED USER LAST POST */}
       <h2>Your Last Post</h2>
@@ -112,7 +116,7 @@ function Posts() {
             </div>
           ))}
       </div>
-    </>
+    </div>
   )
 }
 
