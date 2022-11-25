@@ -1,6 +1,10 @@
 import styles from './Home.module.css'
 import { useContext, useEffect, useState } from 'react'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSquarePollHorizontal } from '@fortawesome/free-solid-svg-icons'
+import { faUserGroup } from '@fortawesome/free-solid-svg-icons'
+
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
 import FriendRequestContext from '../context/FriendRequestContext'
@@ -36,35 +40,54 @@ function Home() {
       <ProfilePicture user={user} />
 
       {/* GREET USER */}
-      <h2>{user?.username}</h2>
+      <h2 className={styles.username}>{user?.username}</h2>
 
-      <hr className={styles.divider} />
+      {/* <hr className={styles.divider} /> */}
 
-      {/* SHOW POSTS BUTTON */}
-      <button
-        onClick={() => {
-          setShowPosts(true)
-          setShowFriends(false)
-        }}
-        style={{
-          borderBottom: showPosts ? '2px solid blue' : 'none',
-        }}
-      >
-        Show Posts
-      </button>
+      <div className={styles.showButtonsContainer}>
+        {/* SHOW POSTS BUTTON */}
+        <button
+          onClick={() => {
+            setShowPosts(true)
+            setShowFriends(false)
+          }}
+          style={{
+            borderBottom: showPosts
+              ? '2px solid var(--color-home-show-button-active)'
+              : 'none',
+            color: showPosts
+              ? 'var(--color-home-show-button-active)'
+              : 'var(--color-home-show-button-inactive)',
+          }}
+        >
+          <FontAwesomeIcon icon={faSquarePollHorizontal} />
+        </button>
 
-      {/* SHOW FRIENDS BUTTON */}
-      <button
-        onClick={() => {
-          setShowFriends(true)
-          setShowPosts(false)
-        }}
-        style={{
-          borderBottom: showFriends ? '2px solid blue' : 'none',
-        }}
-      >
-        Show Friends
-      </button>
+        {/* SHOW FRIENDS BUTTON */}
+        <button
+          onClick={() => {
+            setShowFriends(true)
+            setShowPosts(false)
+          }}
+          style={{
+            borderBottom: showFriends
+              ? '2px solid var(--color-home-show-button-active)'
+              : 'none',
+            color: showFriends
+              ? 'var(--color-home-show-button-active)'
+              : 'var(--color-home-show-button-inactive)',
+          }}
+        >
+          <FontAwesomeIcon icon={faUserGroup} />
+        </button>
+      </div>
+
+      {showPosts && (
+        <>
+          {/* POSTS */}
+          <Posts />
+        </>
+      )}
 
       {showFriends && (
         <>
@@ -73,13 +96,6 @@ function Home() {
 
           {/* FRIENDS */}
           <Friends userFriends={userFriends} />
-        </>
-      )}
-
-      {showPosts && (
-        <>
-          {/* POSTS */}
-          <Posts />
         </>
       )}
     </div>

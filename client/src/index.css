@@ -27,6 +27,13 @@
   --color-profile-picture-edit-button-bg: rgb(229, 230, 236);
   --color-profile-picture-edit-text: var(--color-search-results-title-text);
 
+  --color-home-username: rgb(29, 33, 41);
+
+  --color-home-show-button-inactive: rgb(97, 103, 113);
+  --color-home-show-button-active: rgb(54, 120, 229);
+
+  --color-home-divider: rgb(238, 238, 238);
+
   --border-radius-primary: 0.25rem;
   --border-radius-button: var(--border-radius-primary);
   --border-radius-input: var(--border-radius-primary);
