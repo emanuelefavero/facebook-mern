@@ -50,14 +50,17 @@ function Posts() {
       <hr className={styles.divider} />
 
       {/* LOGGED USER LAST POST */}
-      <h2>Your Last Post</h2>
-      {userPosts.length > 0 ? (
-        <div>
+      <div className={styles.lastPost}>
+        <h4>Your Last Post</h4>
+        <hr />
+        {userPosts.length > 0 ? (
           <p>{userPosts[userPosts.length - 1].content}</p>
-        </div>
-      ) : (
-        <p>You have no posts yet</p>
-      )}
+        ) : (
+          <p>You have no posts yet</p>
+        )}
+      </div>
+
+      <hr className={styles.divider} />
 
       {/* FRIENDS POSTS */}
       <h2>Your Friends Posts</h2>
