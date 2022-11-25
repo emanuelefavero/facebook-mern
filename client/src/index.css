@@ -1,5 +1,8 @@
 /* CUSTOM PROPERTIES */
 :root {
+  --white: #fff;
+  --black: #000;
+
   --color-primary: rgb(26, 118, 242);
   --color-success: rgb(1, 165, 1);
 
@@ -17,6 +20,12 @@
   --color-search-results-title-background: rgb(246, 247, 249);
   --color-search-results-title-text: rgb(81, 86, 93);
   --color-search-results-text: rgb(21, 21, 21);
+
+  --color-profile-picture-border: #fff;
+  --color-profile-picture-shadow: rgb(240, 240, 240);
+  --color-profile-picture-edit-button: #000;
+  --color-profile-picture-edit-button-bg: rgb(229, 230, 236);
+  --color-profile-picture-edit-text: var(--color-search-results-title-text);
 
   --border-radius-primary: 0.25rem;
   --border-radius-button: var(--border-radius-primary);
@@ -47,6 +56,11 @@ a:hover,
 a:active {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   text-decoration: none;
+}
+
+input:active,
+input:focus {
+  outline: none;
 }
 
 ul {

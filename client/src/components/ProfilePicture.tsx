@@ -1,6 +1,11 @@
+import styles from './ProfilePicture.module.css'
 import { useState } from 'react'
 import axios from 'axios'
 import { baseURL } from '../axiosConfig'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCamera } from '@fortawesome/free-solid-svg-icons'
+import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons'
 
 // IMPORT INTERFACE
 import UserInterface from '../interfaces/UserInterface'
@@ -34,23 +39,12 @@ function ProfilePicture({ user }: Props) {
   }
 
   return (
-    <>
+    <div className={styles.profilePicture}>
       {/* PROFILE PICTURE */}
-      <div className='profile-picture-container'>
-        <button
-          onClick={() =>
-            setEditModeProfilePictureUrl(!editModeProfilePictureUrl)
-          }
-        >
-          {editModeProfilePictureUrl ? (
-            <span>Cancel</span>
-          ) : (
-            <span>Edit profile picture</span>
-          )}
-        </button>
-
+      <div className={styles.pictureContainer}>
         {editModeProfilePictureUrl ? (
-          <div>
+          <div className={styles.editPictureMode}>
+            <p>Change Image URL:</p>
             <input
               type='text'
               placeholder='Profile picture URL...'
@@ -60,16 +54,34 @@ function ProfilePicture({ user }: Props) {
             <button onClick={changeProfilePicture}>Save</button>
           </div>
         ) : (
-          <img
-            src={user?.profilePictureUrl}
-            alt='Profile'
-            width='150'
-            height='150'
-            style={{ borderRadius: '50%' }}
-          />
+          <>
+            <img
+              src={user?.profilePictureUrl}
+              alt='Profile'
+              width='150'
+              height='150'
+              style={{ borderRadius: '50%' }}
+            />
+            {/* image border */}
+            <div className={styles.imageBorder}></div>
+          </>
         )}
+
+        {/* EDIT PROFILE PICTURE BUTTON */}
+        <button
+          className={styles.editButton}
+          onClick={() =>
+            setEditModeProfilePictureUrl(!editModeProfilePictureUrl)
+          }
+        >
+          {editModeProfilePictureUrl ? (
+            <FontAwesomeIcon icon={faDeleteLeft} />
+          ) : (
+            <FontAwesomeIcon icon={faCamera} />
+          )}
+        </button>
       </div>
-    </>
+    </div>
   )
 }
 

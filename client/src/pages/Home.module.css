@@ -4,3 +4,10 @@
   flex-direction: column;
   align-items: center;
 }
+
+.home hr.divider {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 4px solid rgb(238, 238, 238);
+}

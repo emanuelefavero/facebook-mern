@@ -38,6 +38,8 @@ function Home() {
       {/* GREET USER */}
       <h2>{user?.username}</h2>
 
+      <hr className={styles.divider} />
+
       {/* SHOW POSTS BUTTON */}
       <button
         onClick={() => {
