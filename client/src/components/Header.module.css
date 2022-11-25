@@ -1,0 +1,36 @@
+.header {
+  background-color: var(--color-header-background);
+  color: var(--color-header-text);
+  padding: 0.7rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header a {
+  color: var(--color-header-text);
+}
+
+.header .backButton {
+  border: 0;
+  background: 0;
+  color: var(--color-header-text);
+  font-size: 1rem;
+  font-weight: 400;
+
+  position: absolute;
+  left: 0;
+  margin-left: 1rem;
+}
+
+.header .logoutButton {
+  border: 0;
+  background: 0;
+  color: var(--color-header-text);
+  font-size: 1rem;
+  font-weight: 400;
+
+  position: absolute;
+  right: 0;
+  margin-right: 1rem;
+}

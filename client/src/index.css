@@ -7,6 +7,9 @@
   --color-footer-text-darker: rgb(128, 128, 128);
   --color-footer-link: rgb(86, 106, 159);
 
+  --color-header-text: #fff;
+  --color-header-background: rgb(59, 89, 152);
+
   --border-radius-primary: 0.25rem;
   --border-radius-button: var(--border-radius-primary);
   --border-radius-input: var(--border-radius-primary);
