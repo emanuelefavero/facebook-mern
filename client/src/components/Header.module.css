@@ -21,6 +21,7 @@
   position: absolute;
   left: 0;
   margin-left: 1rem;
+  cursor: pointer;
 }
 
 .header .logoutButton {
@@ -33,4 +34,5 @@
   position: absolute;
   right: 0;
   margin-right: 1rem;
+  cursor: pointer;
 }

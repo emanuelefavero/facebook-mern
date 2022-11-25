@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useContext, useEffect } from 'react'
 import UserContext from '../context/UserContext'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+
 function Header() {
   const navigate = useNavigate()
   const { user, getUser, logout } = useContext(UserContext)
@@ -26,7 +29,7 @@ function Header() {
                   navigate(-1)
                 }}
               >
-                {'<'}
+                <FontAwesomeIcon icon={faArrowLeft} />
               </button>
             )}
 
