@@ -19,6 +19,12 @@
   --color-register-input-border-focus: rgb(45, 136, 255);
   --color-register-input-border-focus-shadow: rgb(212, 227, 253);
 
+  --color-login-input-bg: rgb(245, 246, 247);
+  --color-login-input-border: rgb(238, 238, 238);
+  --color-login-input-border-bottom: rgb(228, 228, 228);
+  --color-login-input-placeholder: rgb(117, 117, 117);
+  --color-login-or: rgb(75, 79, 86);
+
   --color-search-input-background: rgb(233, 235, 238);
   --color-search-input-placeholder: var(--color-footer-text);
   --color-search-icon: rgb(71, 76, 82);
