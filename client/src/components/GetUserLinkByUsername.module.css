@@ -1,0 +1,11 @@
+.link button {
+  margin-right: 0.6rem;
+  background: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.link button img {
+  width: 2.5rem;
+  height: 2.5rem;
+}

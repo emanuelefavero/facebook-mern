@@ -176,6 +176,7 @@ function UserDetail() {
                     {post?.comments?.map((comment: any) => (
                       <div key={comment?._id ? comment?._id : uuidv4()}>
                         <GetUserLinkByUsername username={comment?.username} />
+                        <h4>{comment?.username}</h4>
                         <p>{comment?.content}</p>
                         <h6>{comment?.createdAt}</h6>
                       </div>

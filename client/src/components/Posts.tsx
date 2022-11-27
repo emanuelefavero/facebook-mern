@@ -10,6 +10,7 @@ import commentIcon from '../svg/commentIcon.svg'
 // IMPORT COMPONENTS
 import GetUserLinkByUsername from './GetUserLinkByUsername'
 import GetUserLinkById from './GetUserLinkById'
+import GetTimeSince from './GetTimeSince'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
@@ -162,16 +163,28 @@ function Posts() {
               {/* COMMENTS */}
               {/* --Check for undefined */}
               {post?.comments?.length > 0 && showComments ? (
-                <>
+                <div className={styles.comments}>
                   {post?.comments?.map((comment: any) => (
-                    <div key={comment?._id ? comment?._id : uuidv4()}>
+                    <div
+                      className={styles.comment}
+                      key={comment?._id ? comment?._id : uuidv4()}
+                    >
                       {/* --Username and profilePicture Link */}
                       <GetUserLinkByUsername username={comment?.username} />
-                      <p>{comment?.content}</p>
-                      <h6>{comment?.createdAt}</h6>
+                      <div>
+                        <div className={styles.commentText}>
+                          <h5>{comment?.username}</h5>
+                          <p>{comment?.content}</p>
+                        </div>
+
+                        {/* comment.createdAt FORMATTED DATE */}
+                        <span className={`${styles.date}`}>
+                          <GetTimeSince createdAt={comment?.createdAt} />
+                        </span>
+                      </div>
                     </div>
                   ))}
-                </>
+                </div>
               ) : null}
 
               {/* ADD COMMENT */}

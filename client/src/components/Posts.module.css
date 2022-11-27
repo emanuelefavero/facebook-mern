@@ -82,6 +82,7 @@
   border: 1px solid var(--color-home-divider);
 }
 
+/* FRIENDS POSTS */
 .posts .friendsPosts {
   width: 100%;
 }
@@ -122,6 +123,7 @@
   margin-left: 0.3rem;
 }
 
+/* posts content */
 .posts .postContent {
   font-size: 1rem;
   color: var(--black);
@@ -129,6 +131,7 @@
   padding: 0 1rem;
 }
 
+/* likes and comments */
 .posts .likesAndCommentsContainer {
   display: flex;
   flex-direction: row;
@@ -190,6 +193,7 @@
   margin-right: 0.5rem;
 }
 
+/* add comment section */
 .posts .addCommentContainer {
   display: flex;
   flex-direction: row;
@@ -217,8 +221,6 @@
 }
 
 .posts .addCommentContainer button {
-  /* background-color: var(--color-primary); */
-  /* color: var(--white); */
   background: 0;
   font-weight: 500;
   font-size: 0.875rem;
@@ -236,6 +238,42 @@
   border: 0;
 }
 
+/* COMMENTS */
+.posts .comments {
+  width: 100%;
+  padding: 0.7rem 1rem;
+}
+
+.posts .comment {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.posts .comment .commentText {
+  background-color: var(--color-posts-comment-text-bg);
+  padding: 0.3rem 0.9rem;
+  border-radius: 1.15rem;
+}
+
+.posts .comment .commentText h5 {
+  margin-bottom: 0.2rem;
+}
+
+.posts .comment .commentText p {
+  color: var(--color-posts-comment-text);
+}
+
+.posts .comment .date {
+  font-size: 0.8rem;
+  color: var(--color-posts-comment-date);
+  letter-spacing: -0.05rem;
+  font-weight: 500;
+  position: relative;
+  top: 1px;
+  margin-left: 0.9rem;
+}
+
+/* hr DIVIDERS */
 .posts .friendsPosts .divider {
   width: 100%;
 }

@@ -48,6 +48,9 @@
   --color-posts-show-comments-button: rgb(105, 110, 119);
   --color-posts-like-and-comment-button: var(--color-home-show-button-inactive);
   --color-posts-add-comment-button: rgb(192, 197, 201);
+  --color-posts-comment-text-bg: rgb(235, 237, 240);
+  --color-posts-comment-text: rgb(24, 24, 25);
+  --color-posts-comment-date: rgb(142, 149, 159);
 
   --border-radius-primary: 0.25rem;
   --border-radius-button: var(--border-radius-primary);

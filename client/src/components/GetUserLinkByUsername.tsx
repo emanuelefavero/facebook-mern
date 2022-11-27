@@ -1,3 +1,4 @@
+import styles from './GetUserLinkByUsername.module.css'
 import { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -51,7 +52,7 @@ function GetUserLinkByUsername({ username }: Props) {
   }, [])
 
   return (
-    <>
+    <div className={styles.link}>
       {/* PROFILE PICTURE */}
       <button
         onClick={
@@ -75,9 +76,9 @@ function GetUserLinkByUsername({ username }: Props) {
         />
 
         {/* USERNAME */}
-        {displayUsername}
+        {/* {displayUsername} */}
       </button>
-    </>
+    </div>
   )
 }
 
