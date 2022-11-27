@@ -13,6 +13,12 @@
   --color-header-text: #fff;
   --color-header-background: rgb(59, 89, 152);
 
+  --color-register-p: rgb(28, 30, 33);
+  --color-register-label: rgb(97, 104, 113);
+  --color-register-input-border: rgb(204, 208, 212);
+  --color-register-input-border-focus: rgb(45, 136, 255);
+  --color-register-input-border-focus-shadow: rgb(212, 227, 253);
+
   --color-search-input-background: rgb(233, 235, 238);
   --color-search-input-placeholder: var(--color-footer-text);
   --color-search-icon: rgb(71, 76, 82);
@@ -29,7 +35,7 @@
 
   --color-home-username: rgb(29, 33, 41);
 
-  --color-home-show-button-inactive: rgb(97, 103, 113);
+  --color-home-show-button-inactive: var(--color-register-label);
   --color-home-show-button-active: rgb(54, 120, 229);
 
   --color-home-divider: rgb(238, 238, 238);
@@ -46,7 +52,7 @@
     rgb(24, 92, 242) 100%
   );
   --color-posts-show-comments-button: rgb(105, 110, 119);
-  --color-posts-like-and-comment-button: var(--color-home-show-button-inactive);
+  --color-posts-like-and-comment-button: var(--color-register-label);
   --color-posts-add-comment-button: rgb(192, 197, 201);
   --color-posts-comment-text-bg: rgb(235, 237, 240);
   --color-posts-comment-text: rgb(24, 24, 25);

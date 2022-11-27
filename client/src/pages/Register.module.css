@@ -1,0 +1,113 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.register header {
+  background-color: var(--color-header-background);
+  color: var(--white);
+  font-weight: 500;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 0.78rem;
+  margin-bottom: 0.9rem;
+}
+
+.register h2 {
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.register p {
+  color: var(--color-register-p);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: -0.015rem;
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.register .inputsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.register .inputContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
+}
+
+.register .inputContainer label {
+  color: var(--color-register-label);
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: -0.015rem;
+
+  margin-bottom: 0.4rem;
+}
+
+.register input {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: -0.015rem;
+
+  padding: 0.64rem 1rem;
+
+  border: 1px solid var(--color-register-input-border);
+  border-radius: 0.3rem;
+}
+
+.register input:focus {
+  border: 1px solid var(--color-register-input-border-focus);
+  box-shadow: 0 0 0 0.1rem var(--color-register-input-border-focus-shadow);
+}
+
+.register button {
+  color: var(--white);
+  background-color: var(--color-primary);
+
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.015rem;
+
+  width: 100%;
+  max-width: 360px;
+  padding: 0.56rem 1rem;
+  margin-bottom: 1.4rem;
+
+  border: 0;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.register .linkContainer {
+  display: flex;
+  justify-content: flex-start;
+
+  font-size: 0.8rem;
+  width: 100%;
+  padding: 0 1.25rem;
+}
+
+.register .linkContainer a {
+  color: var(--color-footer-link);
+}
