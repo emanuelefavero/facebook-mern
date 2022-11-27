@@ -103,7 +103,7 @@ function Posts() {
                     }}
                     className={styles.postContent}
                   >
-                    {post?.content} {post?.content.length}
+                    {post?.content}
                   </p>
                 </>
               )}
