@@ -37,6 +37,14 @@
   --color-posts-input-border: rgb(225, 227, 230);
   --color-posts-input-placeholder: var(--color-search-icon);
   --color-posts-last-post-h4: rgb(154, 154, 154);
+  --color-posts-username: var(--color-home-username);
+  --color-posts-date: var(--color-footer-text);
+  --color-posts-world-icon: rgb(182, 182, 182);
+  --color-posts-thumbs-up-icon: linear-gradient(
+    to bottom,
+    rgb(49, 165, 253) 0%,
+    rgb(24, 92, 242) 100%
+  );
 
   --border-radius-primary: 0.25rem;
   --border-radius-button: var(--border-radius-primary);

@@ -84,3 +84,68 @@
 .posts .friendsPosts {
   width: 100%;
 }
+
+.posts .link {
+  display: flex;
+  padding: 0.7rem 1rem;
+}
+
+.posts .link .usernameAndDate {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  padding: 0rem 0.6rem;
+}
+
+.posts .link .usernameText {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-posts-username);
+  margin-bottom: 0.2rem;
+}
+
+.posts .link .date {
+  font-size: 0.85rem;
+  color: var(--color-posts-date);
+  letter-spacing: -0.02rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.posts .link .worldIcon {
+  font-size: 0.7rem;
+  color: var(--color-posts-world-icon);
+  margin-left: 0.3rem;
+}
+
+.posts .postContent {
+  font-size: 1rem;
+  color: var(--black);
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.posts .likes {
+  padding: 0.7rem 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.posts .likes .thumbsUpIcon {
+  color: var(--white);
+  background: var(--color-posts-thumbs-up-icon);
+  font-size: 0.8rem;
+  padding: 0.2rem;
+  padding-bottom: 0.27rem;
+  padding-left: 0.25rem;
+  border-radius: 100px;
+  position: relative;
+  margin-right: 0.4rem;
+}
+
+.posts .friendsPosts .divider {
+  width: 100%;
+}

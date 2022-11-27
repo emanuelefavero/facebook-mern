@@ -2,6 +2,9 @@ import styles from './Posts.module.css'
 import { v4 as uuidv4 } from 'uuid'
 import { useEffect, useContext } from 'react'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+
 // IMPORT COMPONENTS
 import GetUserLinkByUsername from './GetUserLinkByUsername'
 import GetUserLinkById from './GetUserLinkById'
@@ -33,21 +36,6 @@ function Posts() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
 
   return (
     <div className={styles.posts}>
@@ -81,36 +69,32 @@ function Posts() {
       <div className={styles.friendsPosts}>
         {userFriendsLastPosts!.length > 0 &&
           userFriendsLastPosts!.map((post: any) => (
-            <div key={post?._id ? post?._id : uuidv4()}>
+            <div
+              className={styles.friendPost}
+              key={post?._id ? post?._id : uuidv4()}
+            >
               {/* --Check if post has content */}
               {post?.content && (
                 <>
                   {/* --Username and profilePicture Link */}
-                  <GetUserLinkById id={post?.author} />
-                  {/* POST DATE */}
-                  <div>
-                    {monthNames[new Date(post?.createdAt).getMonth()]}{' '}
-                    {new Date(post?.createdAt).getDate()}{' '}
-                    {new Date(post?.createdAt).getFullYear() !==
-                      new Date().getFullYear() &&
-                      new Date(post?.createdAt).getFullYear()}{' '}
-                    at{' '}
-                    {new Date(post?.createdAt).toLocaleString('en-US', {
-                      hour: 'numeric',
-                      hour12: true,
-                      minute: 'numeric',
-                    })}
-                  </div>
-                  <p>{post?.content}</p>
+                  <GetUserLinkById
+                    id={post?.author}
+                    createdAt={post?.createdAt}
+                  />
+                  <p className={styles.postContent}>{post?.content}</p>
                 </>
               )}
 
               {/* POST LIKES */}
               {/* --Check for undefined */}
               {post?.likes?.length >= 0 ? (
-                <>
-                  <p>Likes: {post?.likes?.length}</p>
-                </>
+                <div className={styles.likes}>
+                  <FontAwesomeIcon
+                    className={styles.thumbsUpIcon}
+                    icon={faThumbsUp}
+                  />
+                  <span>{post?.likes?.length}</span>
+                </div>
               ) : null}
 
               {/* LIKE POST */}

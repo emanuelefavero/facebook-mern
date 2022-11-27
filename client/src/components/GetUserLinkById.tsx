@@ -1,16 +1,21 @@
 import friendRequestsStyles from './FriendRequests.module.css'
+import postsStyles from './Posts.module.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { baseURL } from '../axiosConfig'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEarthAmerica } from '@fortawesome/free-solid-svg-icons'
+
 axios.defaults.baseURL = baseURL
 
 interface Props {
   id: string
+  createdAt?: string
 }
 
-function GetUserLinkById({ id }: Props) {
+function GetUserLinkById({ id, createdAt }: Props) {
   const [displayUsername, setDisplayUsername] = useState('')
   const [displayProfilePictureUrl, setDisplayProfilePictureUrl] = useState('')
 
@@ -44,11 +49,26 @@ function GetUserLinkById({ id }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+
   return (
     <>
       {/* PROFILE PICTURE */}
       <Link
-        className={friendRequestsStyles.link}
+        className={`${friendRequestsStyles.link} ${postsStyles.link}`}
         to={`/user/${displayUsername}`}
       >
         <img
@@ -59,10 +79,34 @@ function GetUserLinkById({ id }: Props) {
           style={{ borderRadius: '50%' }}
         />
 
-        {/* USERNAME */}
-        <span className={friendRequestsStyles.usernameText}>
-          {displayUsername}
-        </span>
+        <div className={postsStyles.usernameAndDate}>
+          {/* USERNAME */}
+          <span
+            className={`${friendRequestsStyles.usernameText} ${postsStyles.usernameText}`}
+          >
+            {displayUsername}
+          </span>
+          {/* createdAt FORMATTED DATE */}
+          {createdAt && (
+            <span className={`${postsStyles.date}`}>
+              {monthNames[new Date(createdAt).getMonth()]}{' '}
+              {new Date(createdAt).getDate()}{' '}
+              {new Date(createdAt).getFullYear() !== new Date().getFullYear() &&
+                new Date(createdAt).getFullYear()}{' '}
+              at{' '}
+              {new Date(createdAt).toLocaleString('en-US', {
+                hour: 'numeric',
+                hour12: true,
+                minute: 'numeric',
+              })}{' '}
+              &middot;{' '}
+              <FontAwesomeIcon
+                icon={faEarthAmerica}
+                className={postsStyles.worldIcon}
+              />
+            </span>
+          )}
+        </div>
       </Link>
     </>
   )
