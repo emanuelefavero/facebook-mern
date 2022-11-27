@@ -42,8 +42,6 @@ function Home() {
       {/* GREET USER */}
       <h2 className={styles.username}>{user?.username}</h2>
 
-      {/* <hr className={styles.divider} /> */}
-
       <div className={styles.showButtonsContainer}>
         {/* SHOW POSTS BUTTON */}
         <button

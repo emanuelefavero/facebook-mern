@@ -75,141 +75,140 @@ function Posts() {
       <div className={styles.friendsPosts}>
         {userFriendsLastPosts!.length > 0 &&
           userFriendsLastPosts!.map((post: any) => (
-            <div
-              className={styles.friendPost}
-              key={post?._id ? post?._id : uuidv4()}
-            >
-              {/* --Check if post has content */}
-              {post?.content && (
-                <>
-                  {/* --Username and profilePicture Link */}
-                  <GetUserLinkById
-                    id={post?.author}
-                    createdAt={post?.createdAt}
-                  />
-                  <p
-                    style={{
-                      fontSize:
-                        post?.content.length > 200
-                          ? '0.9rem'
-                          : post?.content.length > 100
-                          ? '1rem'
-                          : post?.content.length > 50
-                          ? '1.15rem'
-                          : post?.content.length > 25
-                          ? '1.25rem'
-                          : '1.5rem',
-                      fontWeight: post?.content.length > 100 ? '400' : '300',
-                    }}
-                    className={styles.postContent}
-                  >
-                    {post?.content}
-                  </p>
-                </>
-              )}
-
-              <div className={styles.likesAndCommentsContainer}>
-                {/* POST LIKES */}
-                {/* --Check for undefined */}
-                {post?.likes?.length >= 0 ? (
-                  <div className={styles.likes}>
-                    <FontAwesomeIcon
-                      className={styles.thumbsUpIcon}
-                      icon={faThumbsUp}
+            <>
+              <div
+                className={styles.friendPost}
+                key={post?._id ? post?._id : uuidv4()}
+              >
+                {/* --Check if post has content */}
+                {post?.content && (
+                  <>
+                    {/* --Username and profilePicture Link */}
+                    <GetUserLinkById
+                      id={post?.author}
+                      createdAt={post?.createdAt}
                     />
-                    <span>{post?.likes?.length}</span>
-                  </div>
-                ) : null}
-
-                {/* SHOW COMMENTS BUTTON */}
-                {post?.comments?.length > 0 && (
-                  <button
-                    className={styles.showComments}
-                    onClick={() => setShowComments(!showComments)}
-                  >
-                    {post?.comments?.length} Comment
-                    {post?.comments?.length === 1 ? '' : 's'}
-                  </button>
-                )}
-              </div>
-
-              <hr />
-
-              <div className={styles.likeAndCommentButtonContainer}>
-                {/* LIKE POST */}
-                {/* --Check for undefined */}
-                {post?.likes?.length >= 0 ? (
-                  <>
-                    <button onClick={() => likePost(post?._id)}>
-                      <img src={likeIcon} alt='comment' />
-                      Like
-                    </button>
+                    <p
+                      style={{
+                        fontSize:
+                          post?.content.length > 200
+                            ? '0.9rem'
+                            : post?.content.length > 100
+                            ? '1rem'
+                            : post?.content.length > 50
+                            ? '1.15rem'
+                            : post?.content.length > 25
+                            ? '1.25rem'
+                            : '1.5rem',
+                        fontWeight: post?.content.length > 100 ? '400' : '300',
+                      }}
+                      className={styles.postContent}
+                    >
+                      {post?.content}
+                    </p>
                   </>
-                ) : null}
+                )}
 
-                {/* SHOW ADD COMMENT BUTTON */}
-                {post?.content ? (
-                  <>
+                <div className={styles.likesAndCommentsContainer}>
+                  {/* POST LIKES */}
+                  {/* --Check for undefined */}
+                  {post?.likes?.length >= 0 ? (
+                    <div className={styles.likes}>
+                      <FontAwesomeIcon
+                        className={styles.thumbsUpIcon}
+                        icon={faThumbsUp}
+                      />
+                      <span>{post?.likes?.length}</span>
+                    </div>
+                  ) : null}
+
+                  {/* SHOW COMMENTS BUTTON */}
+                  {post?.comments?.length > 0 && (
+                    <button
+                      className={styles.showComments}
+                      onClick={() => setShowComments(!showComments)}
+                    >
+                      {post?.comments?.length} Comment
+                      {post?.comments?.length === 1 ? '' : 's'}
+                    </button>
+                  )}
+                </div>
+
+                {post?.content && <hr />}
+
+                {post?.content && (
+                  <div className={styles.likeAndCommentButtonContainer}>
+                    {/* LIKE POST */}
+                    {/* --Check for undefined */}
+                    {post?.likes?.length >= 0 ? (
+                      <>
+                        <button onClick={() => likePost(post?._id)}>
+                          <img src={likeIcon} alt='comment' />
+                          Like
+                        </button>
+                      </>
+                    ) : null}
+
+                    {/* SHOW ADD COMMENT BUTTON */}
                     <button onClick={() => setShowAddComment(!showAddComment)}>
                       <img src={commentIcon} alt='comment' />
                       Comment
                     </button>
-                  </>
+                  </div>
+                )}
+
+                {/* <hr /> */}
+
+                {/* COMMENTS */}
+                {/* --Check for undefined */}
+                {post?.comments?.length > 0 && showComments ? (
+                  <div className={styles.comments}>
+                    {post?.comments?.map((comment: any) => (
+                      <div
+                        className={styles.comment}
+                        key={comment?._id ? comment?._id : uuidv4()}
+                      >
+                        {/* --Username and profilePicture Link */}
+                        <GetUserLinkByUsername username={comment?.username} />
+                        <div>
+                          <div className={styles.commentText}>
+                            <h5>{comment?.username}</h5>
+                            <p>{comment?.content}</p>
+                          </div>
+
+                          {/* comment.createdAt FORMATTED DATE */}
+                          <span className={`${styles.date}`}>
+                            <GetTimeSince createdAt={comment?.createdAt} />
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+
+                {/* ADD COMMENT */}
+                {/* --Check if post content is not empty */}
+                {post?.content && showAddComment ? (
+                  <div className={styles.addCommentContainer}>
+                    <img
+                      src={user?.profilePictureUrl}
+                      alt='Profile'
+                      width='25'
+                      height='25'
+                      style={{ borderRadius: '50%' }}
+                    />
+                    <input
+                      type='text'
+                      placeholder='Write a comment...'
+                      value={commentContent}
+                      onChange={(e) => setCommentContent(e.target.value)}
+                    />
+                    <button onClick={() => addComment(post?._id)}>Post</button>
+                  </div>
                 ) : null}
               </div>
-
-              <hr />
-
-              {/* COMMENTS */}
-              {/* --Check for undefined */}
-              {post?.comments?.length > 0 && showComments ? (
-                <div className={styles.comments}>
-                  {post?.comments?.map((comment: any) => (
-                    <div
-                      className={styles.comment}
-                      key={comment?._id ? comment?._id : uuidv4()}
-                    >
-                      {/* --Username and profilePicture Link */}
-                      <GetUserLinkByUsername username={comment?.username} />
-                      <div>
-                        <div className={styles.commentText}>
-                          <h5>{comment?.username}</h5>
-                          <p>{comment?.content}</p>
-                        </div>
-
-                        {/* comment.createdAt FORMATTED DATE */}
-                        <span className={`${styles.date}`}>
-                          <GetTimeSince createdAt={comment?.createdAt} />
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
-
-              {/* ADD COMMENT */}
-              {/* --Check if post content is not empty */}
-              {post?.content && showAddComment ? (
-                <div className={styles.addCommentContainer}>
-                  <img
-                    src={user?.profilePictureUrl}
-                    alt='Profile'
-                    width='25'
-                    height='25'
-                    style={{ borderRadius: '50%' }}
-                  />
-                  <input
-                    type='text'
-                    placeholder='Write a comment...'
-                    value={commentContent}
-                    onChange={(e) => setCommentContent(e.target.value)}
-                  />
-                  <button onClick={() => addComment(post?._id)}>Post</button>
-                </div>
-              ) : null}
-
               <hr className={styles.divider} />
-            </div>
+            </>
           ))}
       </div>
       <hr className={styles.lastDivider} />

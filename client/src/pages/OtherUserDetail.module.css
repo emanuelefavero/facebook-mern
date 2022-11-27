@@ -1,143 +1,101 @@
-.posts {
+.otherUserDetail {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  background-color: var(--white);
 }
 
-.posts hr.divider {
-  width: 100%;
-  /* margin-top: 0.4rem; */
-  border: 4px solid var(--color-home-divider);
-}
-
-.posts .createPost {
+.profilePicture {
   display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0.6rem 1rem;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
 }
 
-.posts .createPost input {
+.profilePicture .pictureContainer {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
+}
+
+.profilePicture .pictureContainer .imageBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+
   width: 100%;
   height: 100%;
-  border-radius: 50px;
-  border: 1px solid var(--color-posts-input-border);
-  padding: 0.5rem 1rem;
-  margin-right: 1rem;
+
+  border-radius: 100px;
+  border: 5px solid var(--color-profile-picture-border);
+  box-shadow: 0 0 0 1px var(--color-profile-picture-shadow);
 }
 
-.posts .createPost input::placeholder {
-  color: var(--color-posts-input-placeholder);
+.otherUserDetail h2 {
+  margin-bottom: 0.8rem;
+}
+
+.otherUserDetail .addFriendContainer {
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.otherUserDetail .addFriendContainer p {
+  margin: 0;
   font-size: 0.875rem;
-  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 1rem;
 }
 
-.posts .createPost button {
+.otherUserDetail .addFriendContainer button {
   background-color: var(--color-primary);
   color: var(--white);
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 1rem;
   padding: 0.5rem 2.5rem;
   border: 0;
   border-radius: var(--border-radius-primary);
-}
-
-.posts .lastPost {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-}
-
-.posts .lastPost h4 {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--color-posts-last-post-h4);
-  letter-spacing: -0.02rem;
-  width: 100%;
-  padding-top: 0.3rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 0.4rem;
-}
-
-.posts .lastPost p {
-  font-size: 1rem;
-  color: var(--color-posts-last-post-p);
-  width: 100%;
-  padding-top: 0.3rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 0.4rem;
-}
-
-.posts hr {
-  width: 100%;
-  border: 1px solid var(--color-home-divider);
+  max-width: 478px;
+  cursor: pointer;
+  margin-bottom: 1rem;
 }
 
 /* FRIENDS POSTS */
-.posts .friendsPosts {
+.otherUserDetail .otherUserPosts {
   width: 100%;
 }
-.posts .friendsPosts .friendPost {
-  width: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
+
+.otherUserDetail .otherUserPost {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
-.posts .link {
-  display: flex;
-  padding: 0.7rem 1rem;
-}
-
-.posts .link .usernameAndDate {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-  padding: 0rem 0.6rem;
-}
-
-.posts .link .usernameText {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--color-posts-username);
-  margin-bottom: 0.2rem;
-}
-
-.posts .link .date {
+.otherUserDetail .otherUserPost .date {
   font-size: 0.85rem;
   color: var(--color-posts-date);
   letter-spacing: -0.02rem;
   font-weight: 500;
   display: flex;
   align-items: center;
-}
-
-.posts .link .worldIcon {
-  font-size: 0.7rem;
-  color: var(--color-posts-world-icon);
-  margin-left: 0.3rem;
+  margin-top: 0.6rem;
 }
 
 /* posts content */
-.posts .postContent {
+.otherUserDetail .postContent {
   font-size: 1rem;
   color: var(--black);
   width: 100%;
-  padding: 0 1rem;
 }
 
 /* likes and comments */
-.posts .likesAndCommentsContainer {
+.otherUserDetail .likesAndCommentsContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -145,13 +103,13 @@
   width: 100%;
 }
 
-.posts .likes {
+.otherUserDetail .likes {
   padding: 0.7rem 1rem;
   display: flex;
   align-items: center;
 }
 
-.posts .likes .thumbsUpIcon {
+.otherUserDetail .likes .thumbsUpIcon {
   color: var(--white);
   background: var(--color-posts-thumbs-up-icon);
   font-size: 0.8rem;
@@ -163,7 +121,7 @@
   margin-right: 0.4rem;
 }
 
-.posts button.showComments {
+.otherUserDetail button.showComments {
   background-color: transparent;
   color: var(--color-posts-show-comments-button);
   font-weight: 500;
@@ -173,13 +131,13 @@
   cursor: pointer;
 }
 
-.posts .likeAndCommentButtonContainer {
+.otherUserDetail .likeAndCommentButtonContainer {
   display: flex;
   justify-content: space-around;
   padding: 0.5rem 1rem;
 }
 
-.posts .likeAndCommentButtonContainer button {
+.otherUserDetail .likeAndCommentButtonContainer button {
   background-color: transparent;
   color: var(--color-posts-like-and-comment-button);
   letter-spacing: -0.02rem;
@@ -191,7 +149,7 @@
   align-items: center;
 }
 
-.posts .likeAndCommentButtonContainer img {
+.otherUserDetail .likeAndCommentButtonContainer img {
   opacity: 0.625;
   width: 1.15rem;
   height: 1.15rem;
@@ -199,7 +157,7 @@
 }
 
 /* add comment section */
-.posts .addCommentContainer {
+.otherUserDetail .addCommentContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -208,14 +166,14 @@
   padding: 0.6rem 1rem;
 }
 
-.posts .addCommentContainer img {
+.otherUserDetail .addCommentContainer img {
   width: 2.4rem;
   height: 2.4em;
   margin-right: 0.6rem;
   cursor: pointer;
 }
 
-.posts .addCommentContainer input {
+.otherUserDetail .addCommentContainer input {
   width: 100%;
   height: 100%;
   border-radius: 50px;
@@ -225,7 +183,7 @@
   margin-right: 0.6rem;
 }
 
-.posts .addCommentContainer button {
+.otherUserDetail .addCommentContainer button {
   background: 0;
   font-weight: 500;
   font-size: 0.875rem;
@@ -236,7 +194,7 @@
   cursor: pointer;
 }
 
-.posts .addCommentContainer button:hover {
+.otherUserDetail .addCommentContainer button:hover {
   background-color: var(--color-primary);
   color: var(--white);
   padding: 0.65rem 0.613rem;
@@ -244,31 +202,31 @@
 }
 
 /* COMMENTS */
-.posts .comments {
+.otherUserDetail .comments {
   width: 100%;
   padding: 0.7rem 1rem;
 }
 
-.posts .comment {
+.otherUserDetail .comment {
   display: flex;
   margin-bottom: 1rem;
 }
 
-.posts .comment .commentText {
+.otherUserDetail .comment .commentText {
   background-color: var(--color-posts-comment-text-bg);
   padding: 0.3rem 0.9rem;
   border-radius: 1.15rem;
 }
 
-.posts .comment .commentText h5 {
+.otherUserDetail .comment .commentText h5 {
   margin-bottom: 0.2rem;
 }
 
-.posts .comment .commentText p {
+.otherUserDetail .comment .commentText p {
   color: var(--color-posts-comment-text);
 }
 
-.posts .comment .date {
+.otherUserDetail .comment .date {
   font-size: 0.8rem;
   color: var(--color-posts-comment-date);
   letter-spacing: -0.05rem;
@@ -279,12 +237,25 @@
 }
 
 /* hr DIVIDERS */
-.posts .friendsPosts .divider {
+
+.otherUserDetail hr.divider {
   width: 100%;
+  border: 4px solid var(--color-home-divider);
+  /* margin-bottom: 0.6rem; */
 }
 
-hr.lastDivider {
+.otherUserDetail hr.lastDivider {
   width: 100%;
   height: 150px;
   background-color: var(--color-home-divider);
+  border: 0;
+}
+
+/* LOADING */
+.otherUserDetail .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-top: 7rem;
 }

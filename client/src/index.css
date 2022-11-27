@@ -45,6 +45,7 @@
   --color-home-show-button-active: rgb(54, 120, 229);
 
   --color-home-divider: rgb(238, 238, 238);
+  --color-other-user-divider: rgb(206, 208, 212);
 
   --color-posts-input-border: rgb(225, 227, 230);
   --color-posts-input-placeholder: var(--color-search-icon);
@@ -102,6 +103,12 @@ input:focus {
 
 ul {
   list-style-type: none;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: var(--color-other-user-divider);
 }
 
 /* BODY */

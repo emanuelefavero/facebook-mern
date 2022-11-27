@@ -1,14 +1,21 @@
+import styles from './OtherUserDetail.module.css'
 import { v4 as uuidv4 } from 'uuid'
 import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { baseURL } from '../axiosConfig'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import likeIcon from '../svg/likeIcon.svg'
+import commentIcon from '../svg/commentIcon.svg'
+
 // IMPORT INTERFACE
 import PostInterface from '../interfaces/PostInterface'
 
 // IMPORT COMPONENTS
 import GetUserLinkByUsername from '../components/GetUserLinkByUsername'
+import GetTimeSince from '../components/GetTimeSince'
 
 // IMPORT CONTEXT
 import UserContext from '../context/UserContext'
@@ -90,109 +97,207 @@ function UserDetail() {
     }
   }, [userFriendRequests, otherUser])
 
+  const [showComments, setShowComments] = useState(false)
+  const [showAddComment, setShowAddComment] = useState(false)
+
   return (
-    <>
+    <div className={styles.otherUserDetail}>
       {otherUser?.username ? (
         <>
           {/* OTHER USER PROFILE PICTURE */}
-          <img
-            src={otherUser?.profilePictureUrl}
-            alt='Profile'
-            width='150'
-            height='150'
-            style={{ borderRadius: '50%' }}
-          />
+          <div className={styles.profilePicture}>
+            <div className={styles.pictureContainer}>
+              <img
+                className={styles.otherUserProfilePicture}
+                src={otherUser?.profilePictureUrl}
+                alt='Profile'
+                width='150'
+                height='150'
+                style={{ borderRadius: '50%' }}
+              />
+              {/* image border */}
+              <div className={styles.imageBorder}></div>
+            </div>
+          </div>
 
           {/* OTHER USER USERNAME */}
           <h2>{otherUser.username}</h2>
 
           {/* ADD FRIEND */}
           {/* If user is already friend with other user or if the friend request has already been sent, hide 'Add Friend' button */}
-          {user ? (
-            isFriend ? (
-              <p>{otherUser?.username} is your friend</p>
-            ) : hasSentFriendRequest ? (
-              <p>You sent a friend request to {otherUser?.username}</p>
-            ) : (
-              <button
-                onClick={() => {
-                  createFriendRequest({
-                    _id: uuidv4(),
-                    // TIP: We will pass the user and other user usernames and those will be used in the backend to find both users and add those users to the friend request
-                    from: user?.username as string,
-                    to: otherUser?.username as string,
-                  })
-                  window.location.reload()
-                }}
-              >
-                Add Friend
-              </button>
-            )
-          ) : null}
+          <div className={styles.addFriendContainer}>
+            {user ? (
+              isFriend ? (
+                <p>{otherUser?.username} is your friend</p>
+              ) : hasSentFriendRequest ? (
+                <p>You sent a friend request to {otherUser?.username}</p>
+              ) : (
+                <button
+                  onClick={() => {
+                    createFriendRequest({
+                      _id: uuidv4(),
+                      // TIP: We will pass the user and other user usernames and those will be used in the backend to find both users and add those users to the friend request
+                      from: user?.username as string,
+                      to: otherUser?.username as string,
+                    })
+                    window.location.reload()
+                  }}
+                >
+                  Add Friend
+                </button>
+              )
+            ) : null}
+          </div>
+
+          <hr className={styles.divider} />
 
           {/* OTHER USER POSTS */}
-          <h3>Posts</h3>
-          {userPosts.length > 0 ? (
-            userPosts.map((post) => (
-              <div key={post._id}>
-                <p>{post.content}</p>
-                <h6>{post?.createdAt as string}</h6>
+          <div className={styles.otherUserPosts}>
+            {userPosts.length > 0 ? (
+              userPosts.map((post) => (
+                <>
+                  <div className={styles.otherUserPost} key={post._id}>
+                    <div className={styles.date}>
+                      <GetTimeSince createdAt={post?.createdAt as string} />
+                    </div>
+                    <p
+                      style={{
+                        fontSize:
+                          post?.content.length > 200
+                            ? '0.9rem'
+                            : post?.content.length > 100
+                            ? '1rem'
+                            : post?.content.length > 50
+                            ? '1.15rem'
+                            : post?.content.length > 25
+                            ? '1.25rem'
+                            : '1.5rem',
+                        fontWeight: post?.content.length > 100 ? '400' : '300',
+                      }}
+                      className={styles.postContent}
+                    >
+                      {post.content}
+                    </p>
 
-                {/* POST LIKES */}
-                {/* --Check for undefined */}
-                {post?.likes?.length >= 0 ? (
-                  <>
-                    {/* -- check if user is logged in */}
-                    {user && (
-                      <button onClick={() => likePost(post._id as string)}>
-                        Like
-                      </button>
-                    )}
-                    <p>Likes: {post?.likes?.length}</p>
-                  </>
-                ) : null}
+                    <div className={styles.likesAndCommentsContainer}>
+                      {/* POST LIKES */}
+                      {/* --Check for undefined */}
+                      {post?.likes?.length >= 0 ? (
+                        <div className={styles.likes}>
+                          <FontAwesomeIcon
+                            className={styles.thumbsUpIcon}
+                            icon={faThumbsUp}
+                          />
+                          <span>{post?.likes?.length}</span>
+                        </div>
+                      ) : null}
 
-                {/* ADD COMMENT */}
-                {/* --Check if user is logged in && post content is not empty */}
-                {user && post?.content ? (
-                  <>
-                    <input
-                      type='text'
-                      placeholder='Add a comment...'
-                      value={commentContent}
-                      onChange={(e) => setCommentContent(e.target.value)}
-                    />
-                    <button onClick={() => addComment(post?._id as string)}>
-                      Comment
-                    </button>
-                  </>
-                ) : null}
+                      {/* SHOW COMMENTS BUTTON */}
+                      {post?.comments?.length > 0 && (
+                        <button
+                          className={styles.showComments}
+                          onClick={() => setShowComments(!showComments)}
+                        >
+                          {post?.comments?.length} Comment
+                          {post?.comments?.length === 1 ? '' : 's'}
+                        </button>
+                      )}
+                    </div>
 
-                {/* COMMENTS */}
-                {/* --Check for undefined */}
-                {post?.comments?.length > 0 ? (
-                  <>
-                    <p>Comments: {post?.comments?.length}</p>
-                    {post?.comments?.map((comment: any) => (
-                      <div key={comment?._id ? comment?._id : uuidv4()}>
-                        <GetUserLinkByUsername username={comment?.username} />
-                        <h4>{comment?.username}</h4>
-                        <p>{comment?.content}</p>
-                        <h6>{comment?.createdAt}</h6>
+                    <hr />
+
+                    <div className={styles.likeAndCommentButtonContainer}>
+                      {/* LIKE POST */}
+                      {/* --Check for undefined */}
+                      {post?.likes?.length >= 0 ? (
+                        <>
+                          <button onClick={() => likePost(post?._id as string)}>
+                            <img src={likeIcon} alt='comment' />
+                            Like
+                          </button>
+                        </>
+                      ) : null}
+
+                      {/* SHOW ADD COMMENT BUTTON */}
+                      {post?.content ? (
+                        <>
+                          <button
+                            onClick={() => setShowAddComment(!showAddComment)}
+                          >
+                            <img src={commentIcon} alt='comment' />
+                            Comment
+                          </button>
+                        </>
+                      ) : null}
+                    </div>
+
+                    {/* COMMENTS */}
+                    {/* --Check for undefined */}
+                    {post?.comments?.length > 0 && showComments ? (
+                      <div className={styles.comments}>
+                        {post?.comments?.map((comment: any) => (
+                          <div
+                            className={styles.comment}
+                            key={comment?._id ? comment?._id : uuidv4()}
+                          >
+                            {/* --Username and profilePicture Link */}
+                            <GetUserLinkByUsername
+                              username={comment?.username}
+                            />
+                            <div>
+                              <div className={styles.commentText}>
+                                <h5>{comment?.username}</h5>
+                                <p>{comment?.content}</p>
+                              </div>
+
+                              {/* comment.createdAt FORMATTED DATE */}
+                              <span className={`${styles.date}`}>
+                                <GetTimeSince createdAt={comment?.createdAt} />
+                              </span>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </>
-                ) : null}
-              </div>
-            ))
-          ) : (
-            <p>{otherUser?.username} has no posts</p>
-          )}
+                    ) : null}
+
+                    {/* ADD COMMENT */}
+                    {/* --Check if post content is not empty */}
+                    {post?.content && showAddComment ? (
+                      <div className={styles.addCommentContainer}>
+                        <img
+                          src={user?.profilePictureUrl}
+                          alt='Profile'
+                          width='25'
+                          height='25'
+                          style={{ borderRadius: '50%' }}
+                        />
+                        <input
+                          type='text'
+                          placeholder='Write a comment...'
+                          value={commentContent}
+                          onChange={(e) => setCommentContent(e.target.value)}
+                        />
+                        <button onClick={() => addComment(post?._id as string)}>
+                          Post
+                        </button>
+                      </div>
+                    ) : null}
+                  </div>
+                  <hr className={styles.divider} />
+                </>
+              ))
+            ) : (
+              <p>{otherUser?.username} has no posts</p>
+            )}
+            <hr className={styles.lastDivider} />
+          </div>
         </>
       ) : (
-        <h2>User Not Found...</h2>
+        <div className={styles.loading}>
+          <h2>Loading...</h2>
+        </div>
       )}
-    </>
+    </div>
   )
 }
 
