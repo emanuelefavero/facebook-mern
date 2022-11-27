@@ -47,6 +47,7 @@
   );
   --color-posts-show-comments-button: rgb(105, 110, 119);
   --color-posts-like-and-comment-button: var(--color-home-show-button-inactive);
+  --color-posts-add-comment-button: rgb(192, 197, 201);
 
   --border-radius-primary: 0.25rem;
   --border-radius-button: var(--border-radius-primary);

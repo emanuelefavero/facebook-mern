@@ -177,7 +177,7 @@ function Posts() {
               {/* ADD COMMENT */}
               {/* --Check if post content is not empty */}
               {post?.content && showAddComment ? (
-                <>
+                <div className={styles.addCommentContainer}>
                   <img
                     src={user?.profilePictureUrl}
                     alt='Profile'
@@ -192,13 +192,14 @@ function Posts() {
                     onChange={(e) => setCommentContent(e.target.value)}
                   />
                   <button onClick={() => addComment(post?._id)}>Post</button>
-                </>
+                </div>
               ) : null}
 
               <hr className={styles.divider} />
             </div>
           ))}
       </div>
+      <hr className={styles.lastDivider} />
     </div>
   )
 }
