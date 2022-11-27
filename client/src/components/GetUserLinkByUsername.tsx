@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import { baseURL } from '../axiosConfig'
 
 // IMPORT CONTEXT
@@ -13,6 +13,8 @@ interface Props {
 }
 
 function GetUserLinkByUsername({ username }: Props) {
+  const navigate = useNavigate()
+
   const { user } = useContext(UserContext)
 
   const [displayUsername, setDisplayUsername] = useState('')
@@ -51,10 +53,17 @@ function GetUserLinkByUsername({ username }: Props) {
   return (
     <>
       {/* PROFILE PICTURE */}
-      <Link
-        to={
+      <button
+        onClick={
           // IF THE SEARCH RESULT IS THE CURRENT USER, GO TO THE HOME PAGE
-          displayUsername === user?.username ? '/' : `/user/${displayUsername}`
+          () => {
+            if (displayUsername === user?.username) {
+              navigate('/')
+            } else {
+              navigate(`/user/${displayUsername}`)
+              window.location.reload()
+            }
+          }
         }
       >
         <img
@@ -67,7 +76,7 @@ function GetUserLinkByUsername({ username }: Props) {
 
         {/* USERNAME */}
         {displayUsername}
-      </Link>
+      </button>
     </>
   )
 }

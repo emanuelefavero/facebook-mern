@@ -34,6 +34,21 @@ function Posts() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+
   return (
     <div className={styles.posts}>
       {/* CREATE POST */}
@@ -63,8 +78,7 @@ function Posts() {
       <hr className={styles.divider} />
 
       {/* FRIENDS POSTS */}
-      <h2>Your Friends Posts</h2>
-      <div>
+      <div className={styles.friendsPosts}>
         {userFriendsLastPosts!.length > 0 &&
           userFriendsLastPosts!.map((post: any) => (
             <div key={post?._id ? post?._id : uuidv4()}>
@@ -73,8 +87,21 @@ function Posts() {
                 <>
                   {/* --Username and profilePicture Link */}
                   <GetUserLinkById id={post?.author} />
+                  {/* POST DATE */}
+                  <div>
+                    {monthNames[new Date(post?.createdAt).getMonth()]}{' '}
+                    {new Date(post?.createdAt).getDate()}{' '}
+                    {new Date(post?.createdAt).getFullYear() !==
+                      new Date().getFullYear() &&
+                      new Date(post?.createdAt).getFullYear()}{' '}
+                    at{' '}
+                    {new Date(post?.createdAt).toLocaleString('en-US', {
+                      hour: 'numeric',
+                      hour12: true,
+                      minute: 'numeric',
+                    })}
+                  </div>
                   <p>{post?.content}</p>
-                  <h6>{post?.createdAt}</h6>
                 </>
               )}
 
@@ -82,22 +109,15 @@ function Posts() {
               {/* --Check for undefined */}
               {post?.likes?.length >= 0 ? (
                 <>
-                  <button onClick={() => likePost(post?._id)}>Like</button>
                   <p>Likes: {post?.likes?.length}</p>
                 </>
               ) : null}
 
-              {/* ADD COMMENT */}
-              {/* --Check if post content is not empty */}
-              {post?.content ? (
+              {/* LIKE POST */}
+              {/* --Check for undefined */}
+              {post?.likes?.length >= 0 ? (
                 <>
-                  <input
-                    type='text'
-                    placeholder='Add a comment...'
-                    value={commentContent}
-                    onChange={(e) => setCommentContent(e.target.value)}
-                  />
-                  <button onClick={() => addComment(post?._id)}>Comment</button>
+                  <button onClick={() => likePost(post?._id)}>Like</button>
                 </>
               ) : null}
 
@@ -116,6 +136,22 @@ function Posts() {
                   ))}
                 </>
               ) : null}
+
+              {/* ADD COMMENT */}
+              {/* --Check if post content is not empty */}
+              {post?.content ? (
+                <>
+                  <input
+                    type='text'
+                    placeholder='Add a comment...'
+                    value={commentContent}
+                    onChange={(e) => setCommentContent(e.target.value)}
+                  />
+                  <button onClick={() => addComment(post?._id)}>Comment</button>
+                </>
+              ) : null}
+
+              <hr className={styles.divider} />
             </div>
           ))}
       </div>
