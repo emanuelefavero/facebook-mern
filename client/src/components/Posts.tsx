@@ -1,9 +1,11 @@
 import styles from './Posts.module.css'
 import { v4 as uuidv4 } from 'uuid'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import likeIcon from '../svg/likeIcon.svg'
+import commentIcon from '../svg/commentIcon.svg'
 
 // IMPORT COMPONENTS
 import GetUserLinkByUsername from './GetUserLinkByUsername'
@@ -14,7 +16,7 @@ import UserContext from '../context/UserContext'
 import PostsContext from '../context/PostsContext'
 
 function Posts() {
-  const { getUser } = useContext(UserContext)
+  const { getUser, user } = useContext(UserContext)
   const {
     postContent,
     setPostContent,
@@ -36,6 +38,9 @@ function Posts() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const [showComments, setShowComments] = useState(false)
+  const [showAddComment, setShowAddComment] = useState(false)
 
   return (
     <div className={styles.posts}>
@@ -81,35 +86,83 @@ function Posts() {
                     id={post?.author}
                     createdAt={post?.createdAt}
                   />
-                  <p className={styles.postContent}>{post?.content}</p>
+                  <p
+                    style={{
+                      fontSize:
+                        post?.content.length > 200
+                          ? '0.9rem'
+                          : post?.content.length > 100
+                          ? '1rem'
+                          : post?.content.length > 50
+                          ? '1.15rem'
+                          : post?.content.length > 25
+                          ? '1.25rem'
+                          : '1.5rem',
+                      fontWeight: post?.content.length > 100 ? '400' : '300',
+                    }}
+                    className={styles.postContent}
+                  >
+                    {post?.content} {post?.content.length}
+                  </p>
                 </>
               )}
 
-              {/* POST LIKES */}
-              {/* --Check for undefined */}
-              {post?.likes?.length >= 0 ? (
-                <div className={styles.likes}>
-                  <FontAwesomeIcon
-                    className={styles.thumbsUpIcon}
-                    icon={faThumbsUp}
-                  />
-                  <span>{post?.likes?.length}</span>
-                </div>
-              ) : null}
+              <div className={styles.likesAndCommentsContainer}>
+                {/* POST LIKES */}
+                {/* --Check for undefined */}
+                {post?.likes?.length >= 0 ? (
+                  <div className={styles.likes}>
+                    <FontAwesomeIcon
+                      className={styles.thumbsUpIcon}
+                      icon={faThumbsUp}
+                    />
+                    <span>{post?.likes?.length}</span>
+                  </div>
+                ) : null}
 
-              {/* LIKE POST */}
-              {/* --Check for undefined */}
-              {post?.likes?.length >= 0 ? (
-                <>
-                  <button onClick={() => likePost(post?._id)}>Like</button>
-                </>
-              ) : null}
+                {/* SHOW COMMENTS BUTTON */}
+                {post?.comments?.length > 0 && (
+                  <button
+                    className={styles.showComments}
+                    onClick={() => setShowComments(!showComments)}
+                  >
+                    {post?.comments?.length} Comment
+                    {post?.comments?.length === 1 ? '' : 's'}
+                  </button>
+                )}
+              </div>
+
+              <hr />
+
+              <div className={styles.likeAndCommentButtonContainer}>
+                {/* LIKE POST */}
+                {/* --Check for undefined */}
+                {post?.likes?.length >= 0 ? (
+                  <>
+                    <button onClick={() => likePost(post?._id)}>
+                      <img src={likeIcon} alt='comment' />
+                      Like
+                    </button>
+                  </>
+                ) : null}
+
+                {/* SHOW ADD COMMENT BUTTON */}
+                {post?.content ? (
+                  <>
+                    <button onClick={() => setShowAddComment(!showAddComment)}>
+                      <img src={commentIcon} alt='comment' />
+                      Comment
+                    </button>
+                  </>
+                ) : null}
+              </div>
+
+              <hr />
 
               {/* COMMENTS */}
               {/* --Check for undefined */}
-              {post?.comments?.length > 0 ? (
+              {post?.comments?.length > 0 && showComments ? (
                 <>
-                  <p>Comments: {post?.comments?.length}</p>
                   {post?.comments?.map((comment: any) => (
                     <div key={comment?._id ? comment?._id : uuidv4()}>
                       {/* --Username and profilePicture Link */}
@@ -123,15 +176,22 @@ function Posts() {
 
               {/* ADD COMMENT */}
               {/* --Check if post content is not empty */}
-              {post?.content ? (
+              {post?.content && showAddComment ? (
                 <>
+                  <img
+                    src={user?.profilePictureUrl}
+                    alt='Profile'
+                    width='25'
+                    height='25'
+                    style={{ borderRadius: '50%' }}
+                  />
                   <input
                     type='text'
-                    placeholder='Add a comment...'
+                    placeholder='Write a comment...'
                     value={commentContent}
                     onChange={(e) => setCommentContent(e.target.value)}
                   />
-                  <button onClick={() => addComment(post?._id)}>Comment</button>
+                  <button onClick={() => addComment(post?._id)}>Post</button>
                 </>
               ) : null}
 

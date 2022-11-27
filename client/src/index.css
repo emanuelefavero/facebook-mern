@@ -45,6 +45,8 @@
     rgb(49, 165, 253) 0%,
     rgb(24, 92, 242) 100%
   );
+  --color-posts-show-comments-button: rgb(105, 110, 119);
+  --color-posts-like-and-comment-button: var(--color-home-show-button-inactive);
 
   --border-radius-primary: 0.25rem;
   --border-radius-button: var(--border-radius-primary);
