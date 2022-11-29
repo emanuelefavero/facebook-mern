@@ -6,6 +6,22 @@ A Facebook clone built with the MERN stack.
 
 [https://facebook-mern.onrender.com/](https://facebook-mern.onrender.com/)
 
+_NOTE: Some test users are:_
+
+### 1. john
+
+```credentials
+username: john
+password: 1234
+```
+
+### 2. kate
+
+```credentials
+username: kate
+password: 1234
+```
+
 ## Test the app locally on your machine
 
 - Clone the repo and `cd` into the project directory
