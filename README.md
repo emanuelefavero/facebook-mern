@@ -15,23 +15,24 @@ SECRET='ANY_SECRET_KEY'
 PORT=4000
 ```
 
-- Run:
+- RUN SERVER:
 
 ```bash
-cd backend
-yarn install
-yarn start
+npm install
+npm start
 ```
 
-- Open a new terminal and run:
+- RUN CLIENT (open a new terminal window):
 
 ```bash
 cd client
-yarn install
-yarn start
+npm install
+npm start
 ```
 
 - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+NOTE: The server will also serve the build folder on [http://localhost:4000](http://localhost:4000) if you want to test the production build.
 
 ## Useful links
 
