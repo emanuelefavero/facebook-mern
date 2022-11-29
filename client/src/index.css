@@ -111,6 +111,11 @@ hr {
   background-color: var(--color-other-user-divider);
 }
 
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
 /* BODY */
 body {
   margin: 0;
@@ -119,9 +124,4 @@ body {
     'Helvetica Neue', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }

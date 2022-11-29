@@ -17,40 +17,38 @@ function Header() {
   }, [])
 
   return (
-    <>
+    <header className={styles.header}>
       {user?.username ? (
-        <header className={styles.header}>
-          <>
-            {/* BACK BUTTON */}
-            {window.location.pathname !== '/' && (
-              <button
-                className={styles.backButton}
-                onClick={() => {
-                  navigate(-1)
-                }}
-              >
-                <FontAwesomeIcon icon={faArrowLeft} />
-              </button>
-            )}
-
-            {/* LOGO */}
-            <Link className={styles.logo} to='/'>
-              Facebook
-            </Link>
-
-            {/* LOGOUT BUTTON */}
+        <>
+          {/* BACK BUTTON */}
+          {window.location.pathname !== '/' && (
             <button
-              className={styles.logoutButton}
+              className={styles.backButton}
               onClick={() => {
-                logout()
+                navigate(-1)
               }}
             >
-              Logout
+              <FontAwesomeIcon icon={faArrowLeft} />
             </button>
-          </>
-        </header>
+          )}
+
+          {/* LOGO */}
+          <Link className={styles.logo} to='/'>
+            Facebook
+          </Link>
+
+          {/* LOGOUT BUTTON */}
+          <button
+            className={styles.logoutButton}
+            onClick={() => {
+              logout()
+            }}
+          >
+            Logout
+          </button>
+        </>
       ) : null}
-    </>
+    </header>
   )
 }
 

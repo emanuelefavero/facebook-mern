@@ -2,7 +2,7 @@ import styles from './Footer.module.css'
 
 function Footer() {
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       <ul>
         <li>
           <h4>Contact Me:</h4>
@@ -15,7 +15,7 @@ function Footer() {
         </li>
       </ul>
       <p>Emanuele Favero @ {new Date().getFullYear()}</p>
-    </div>
+    </footer>
   )
 }
 

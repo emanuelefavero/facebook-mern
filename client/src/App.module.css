@@ -1,0 +1,23 @@
+/* CENTER CONTENT AND APPLY MAX WIDTH */
+.App {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  width: 100%;
+}
+
+main {
+  width: 100%;
+  max-width: 844px;
+}
+
+footer {
+  width: 100%;
+  max-width: 844px;
+  padding: 0 1rem;
+}
