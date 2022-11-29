@@ -49,9 +49,9 @@ require('./passportConfig')(passport)
 app.use('/api', routes)
 
 // Serve static assets if in production
-app.use(express.static(path.join(__dirname, '../client/build')))
+app.use(express.static(path.join(__dirname, './client/build')))
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build'))
+  res.sendFile(path.join(__dirname, './client/build'))
 })
 
 // Start server
