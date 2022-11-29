@@ -2,6 +2,10 @@
 
 A Facebook clone built with the MERN stack.
 
+## Live Demo (Render)
+
+[https://facebook-mern.onrender.com/](https://facebook-mern.onrender.com/)
+
 ## Test the app locally on your machine
 
 - Clone the repo and `cd` into the project directory
