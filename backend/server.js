@@ -1,4 +1,5 @@
 require('dotenv').config()
+const path = require('path')
 const mongoose = require('mongoose')
 const express = require('express')
 const cors = require('cors')
@@ -46,6 +47,12 @@ require('./passportConfig')(passport)
 
 // Routes
 app.use('/api', routes)
+
+// Serve static assets if in production
+app.use(express.static(path.join(__dirname, '../client/build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build'))
+})
 
 // Start server
 const PORT = process.env.PORT || 4000
