@@ -17,7 +17,12 @@ function Header() {
   }, [])
 
   return (
-    <header className={styles.header}>
+    <header
+      className={styles.header}
+      style={{
+        width: window.location.pathname === '/login' ? '0%' : '100%',
+      }}
+    >
       {user?.username ? (
         <>
           {/* BACK BUTTON */}
@@ -47,7 +52,9 @@ function Header() {
             Logout
           </button>
         </>
-      ) : null}
+      ) : (
+        <div>Join Facebook</div>
+      )}
     </header>
   )
 }

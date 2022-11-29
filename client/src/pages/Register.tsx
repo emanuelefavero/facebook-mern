@@ -27,7 +27,6 @@ function Register() {
   } else {
     return (
       <div className={styles.register}>
-        <header>Join Facebook</header>
         <h2>Choose a username and password: </h2>
         <p>Enter a unique username to use on our site.</p>
         <div className={styles.inputsContainer}>

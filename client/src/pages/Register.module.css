@@ -6,9 +6,8 @@
   width: 100%;
 }
 
-.register header {
-  background-color: var(--color-header-background);
-  color: var(--white);
+.register .registerHeader {
+  color: var(--black);
   font-weight: 500;
 
   display: flex;
@@ -23,6 +22,7 @@
 
 .register h2 {
   font-size: 1.3rem;
+  margin-top: 3rem;
   margin-bottom: 0.4rem;
   padding-left: 1rem;
   padding-right: 1rem;
