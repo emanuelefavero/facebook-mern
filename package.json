@@ -1,0 +1,22 @@
+{
+  "name": "facebook-mern",
+  "version": "1.0.0",
+  "description": "A Facebook clone built with the MERN stack.",
+  "main": "./backend/server.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "npm start --prefix backend",
+    "build": "npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emanuelefavero/facebook-mern.git"
+  },
+  "keywords": [],
+  "author": "Emanuele Favero",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emanuelefavero/facebook-mern/issues"
+  },
+  "homepage": "https://github.com/emanuelefavero/facebook-mern#readme"
+}
