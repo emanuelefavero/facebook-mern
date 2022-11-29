@@ -75,11 +75,8 @@ function Posts() {
       <div className={styles.friendsPosts}>
         {userFriendsLastPosts!.length > 0 &&
           userFriendsLastPosts!.map((post: any) => (
-            <>
-              <div
-                className={styles.friendPost}
-                key={post?._id ? post?._id : uuidv4()}
-              >
+            <div key={post?._id ? post?._id : uuidv4()}>
+              <div className={styles.friendPost}>
                 {/* --Check if post has content */}
                 {post?.content && (
                   <>
@@ -208,7 +205,7 @@ function Posts() {
                 ) : null}
               </div>
               <hr className={styles.divider} />
-            </>
+            </div>
           ))}
       </div>
       <hr className={styles.lastDivider} />
