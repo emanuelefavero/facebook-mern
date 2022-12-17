@@ -6,6 +6,10 @@ A Facebook clone built with the MERN stack.
 
 [https://facebook-mern.onrender.com/](https://facebook-mern.onrender.com/)
 
+#### Screenshots
+
+![Project Screenshot](./screenshot.png?raw=true 'Project Screenshot')
+
 _NOTE: Some test users are:_
 
 ### 1. john
@@ -21,10 +25,6 @@ password: 1234
 username: kate
 password: 1234
 ```
-
-#### Screenshots
-
-![Project Screenshot](./screenshot.png?raw=true 'Project Screenshot')
 
 ## Test the app locally on your machine
 
