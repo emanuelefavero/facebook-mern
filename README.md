@@ -4,6 +4,10 @@ A Facebook clone built with the MERN stack.
 
 ## Live Demo (Render)
 
+- PLEASE NOTE: The app is hosted on a free tier, so it may take up to **30 seconds to load**
+
+> **TEST USER:** username: `john`, password: `1234`
+
 [https://facebook-mern.onrender.com/](https://facebook-mern.onrender.com/)
 
 #### Screenshots
