@@ -64,3 +64,7 @@ NOTE: The server will also serve the build folder on [http://localhost:4000](htt
 ## Useful links
 
 - [What is the MERN stack](https://www.mongodb.com/mern-stack)
+
+## License
+
+- [MIT](LICENSE.md)
